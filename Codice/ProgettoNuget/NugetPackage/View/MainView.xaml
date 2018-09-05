@@ -4,9 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NugetPackage.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" Height="350" Width="525">
     <Grid>
-            
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="393" Name="path"/>
+        <Button Content="Browse..." Name="browse" HorizontalAlignment="Left" Margin="400,10,0,0" VerticalAlignment="Top" Width="107" Height="23" Click="browse_Click"/>
+        <TextBlock Text="Search: " FontSize="18" Name="search" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="60" Height="23"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="75,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="257" Name="input" KeyUp="input_KeyUp"/>
+        <ListBox HorizontalAlignment="Left" Height="200" Margin="10,70,0,0" VerticalAlignment="Top" Name="listNuget" Width="257" SelectionChanged="listNuget_SelectionChanged"/>
+        <TextBox HorizontalAlignment="Left" Height="100" Margin="272,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" Name="version"/>
+        <Button Content="Save" Name="save" HorizontalAlignment="Left" Margin="272,170,0,0" VerticalAlignment="Top" Width="233" Click="save_Click"/>
     </Grid>
 </UserControl>
