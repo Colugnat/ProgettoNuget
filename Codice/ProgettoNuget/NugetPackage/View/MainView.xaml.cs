@@ -20,7 +20,8 @@ namespace NugetPackage.View
         {
             InitializeComponent();
         }
-
+        string[] contentNuget;
+        string[] versionNuget;
         private void input_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             //ID of the package to be looked up
@@ -37,13 +38,15 @@ namespace NugetPackage.View
 
             //Iterate through the list and print the full name of the pre-release packages to console
             List<string> items = new List<string>();
+            contentNuget = new string[items.Count];
+            versionNuget = new string[items.Count];
+            int i = 0;
             foreach (IPackage p in packages)
             {
-                p.GetContentFiles();
+                i++;
+                versionNuget[i] = p.Version.ToString();
+                contentNuget[i] = "" + p.GetContentFiles();
                 items.Add(p.GetFullName());
-                items.Add("ciao");
-                items.Add("ciao2");
-            //Console.WriteLine(p.GetFullName());
             }
             listNuget.ItemsSource = items;
         }
@@ -60,13 +63,13 @@ namespace NugetPackage.View
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            string percorso = path.Text + "\\" + listNuget.SelectedItem + ".nupkg";
+            string percorso = path.Text + "\\" + listNuget.SelectedItem + "." + versionNuget[listNuget.SelectedIndex] + ".nupkg";
 
             // This text is added only once to the file.
             if (!File.Exists(percorso))
             {
                 // Create a file to write to.
-                string createText = "Hello and Welcome" + Environment.NewLine;
+                string createText = contentNuget[listNuget.SelectedIndex];
                 File.WriteAllText(percorso, createText);
             }
         }
