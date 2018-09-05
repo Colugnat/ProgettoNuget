@@ -24,23 +24,25 @@ namespace NugetPackage.View
         string[] versionNuget;
         private void input_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            //ID of the package to be looked up
+            // stringa del pacchetto che si deve cercare
             string packageID = input.Text;
 
-            //Connect to the official package repository
+            // Connessione con il sito ufficiale dei pacchetti Nuget
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://api.nuget.org/v3/index.json");
 
-            //Get the list of all NuGet packages with ID 'EntityFramework'       
+            // Prendere la lista dei pacchetti Nuget con la stringa per il filtro ricerca     
             List<IPackage> packages = repo.FindPackagesById(packageID).ToList();
 
-            //Filter the list of packages that are not Release (Stable) versions
+            // Filtra i pacchetti che sono stati rilasciati
             packages = packages.Where(item => (item.IsReleaseVersion() == false)).ToList();
 
-            //Iterate through the list and print the full name of the pre-release packages to console
+            // Crea una lista
             List<string> items = new List<string>();
+            // Due array con i contenuti dei file con versione
             contentNuget = new string[items.Count];
             versionNuget = new string[items.Count];
             int i = 0;
+            // Riempimento degli array e della lista
             foreach (IPackage p in packages)
             {
                 i++;
@@ -48,11 +50,13 @@ namespace NugetPackage.View
                 contentNuget[i] = "" + p.GetContentFiles();
                 items.Add(p.GetFullName());
             }
+            // Invio dei dati nella listbox del WPF
             listNuget.ItemsSource = items;
         }
 
         private void browse_Click(object sender, RoutedEventArgs e)
         {
+            // Codice che permette di aprire una finestra per scegliere il percorso
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
             folderDialog.SelectedPath = "C:\\";
 
@@ -63,19 +67,22 @@ namespace NugetPackage.View
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
+            // Creare il percorso per la creazione del file (nome.versione.nupkg)
             string percorso = path.Text + "\\" + listNuget.SelectedItem + "." + versionNuget[listNuget.SelectedIndex] + ".nupkg";
 
-            // This text is added only once to the file.
+            // Verificare che il percorso esista è se non esiste si crea il percorso
             if (!File.Exists(percorso))
             {
-                // Create a file to write to.
+                // contenuto nel file nuget preso dall'array contentNuget
                 string createText = contentNuget[listNuget.SelectedIndex];
+                // Creare un file con il contenuto
                 File.WriteAllText(percorso, createText);
             }
         }
 
         private void listNuget_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Modificare la casella per vedere altri degli del pacchetto da installare
             string text = "" + listNuget.SelectedItem + "\nVersion: " + versionNuget[listNuget.SelectedIndex];
             version.Text = text;
         }
