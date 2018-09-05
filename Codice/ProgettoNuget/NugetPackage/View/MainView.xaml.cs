@@ -76,7 +76,7 @@ namespace NugetPackage.View
 
         private void listNuget_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string text = "" + listNuget.SelectedItem;
+            string text = "" + listNuget.SelectedItem + "\nVersion: " + versionNuget[listNuget.SelectedIndex];
             version.Text = text;
         }
     }
