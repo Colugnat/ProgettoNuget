@@ -16,43 +16,43 @@ namespace NugetPackage.View
         }
         private void Input_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            //// stringa del pacchetto che si deve cercare
-            //string packageID = input.Text;
+            // stringa del pacchetto che si deve cercare
+            string packageID = input.Text;
 
-            //// Connessione con il sito ufficiale dei pacchetti Nuget
-            //IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://api.nuget.org/v3/index.json");
+            // Connessione con il sito ufficiale dei pacchetti Nuget
+            IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://api.nuget.org/v3/index.json");
 
-            //// Prendere la lista dei pacchetti Nuget con la stringa per il filtro ricerca     
-            //List<IPackage> packages = repo.FindPackagesById(packageID).ToList();
+            // Prendere la lista dei pacchetti Nuget con la stringa per il filtro ricerca     
+            List<IPackage> packages = repo.FindPackagesById(packageID).ToList();
 
-            //// Filtra i pacchetti che sono stati rilasciati
-            //packages = packages.Where(item => (item.IsReleaseVersion() == false)).ToList();
+            // Filtra i pacchetti che sono stati rilasciati
+            packages = packages.Where(item => (item.IsReleaseVersion() == false)).ToList();
 
-            //// Crea una lista
-            //List<string> items = new List<string>();
-            //// Due array con i contenuti dei file con versione
+            // Crea una lista
+            List<string> items = new List<string>();
+            // Due array con i contenuti dei file con versione
             //contentNuget = new string[items.Count];
             //versionNuget = new string[items.Count];
-            //int i = 0;
-            //// Riempimento degli array e della lista
-            //foreach (IPackage p in packages)
-            //{
-            //    i++;
-            //    versionNuget[i] = p.Version.ToString();
-            //    contentNuget[i] = "" + p.GetContentFiles();
-            //    items.Add(p.GetFullName());
-            //}
-            //// Invio dei dati nella listbox del WPF
-            //listNuget.ItemsSource = items;
-            List<string> items = new List<string>
+            int i = 0;
+            // Riempimento degli array e della lista
+            foreach (IPackage p in packages)
             {
-                "ciao",
-                "ciao1",
-                "ciao2",
-                "ciao3"
-            };
+                i++;
+                //versionNuget[i] = p.Version.ToString();
+                //contentNuget[i] = "" + p.GetContentFiles();
+                items.Add(p.GetFullName());
+            }
             // Invio dei dati nella listbox del WPF
             listNuget.ItemsSource = items;
+            //List<string> items = new List<string>
+            //{
+            //    "ciao",
+            //    "ciao1",
+            //    "ciao2",
+            //    "ciao3"
+            //};
+            //// Invio dei dati nella listbox del WPF
+            //listNuget.ItemsSource = items;
         }
     }
 }
