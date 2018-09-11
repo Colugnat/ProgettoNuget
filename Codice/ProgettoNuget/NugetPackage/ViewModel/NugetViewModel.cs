@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NugetPackage.ViewModel
@@ -57,9 +54,31 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("ContenutoPacchetto");
             }
         }
+    
+        public List<string> RisultatoRicerca
+        {
+            get { return model.RisultatoRicerca; }
+            set
+            {
+                model.RisultatoRicerca = value;
+                OnPropertyChanged("RisultatoRicerca");
+            }
+        }
+
+        public string RisultatoPacchetto
+        {
+            get { return model.RisultatoPacchetto; }
+            set
+            {
+                model.RisultatoPacchetto = value;
+                OnPropertyChanged("RisultatoPacchetto");
+            }
+        }
+
 
         public IDelegateCommand BrowseCommand { get; protected set; }
         public IDelegateCommand SaveCommand { get; protected set; }
+        public IDelegateCommand ShowCommand { get; protected set; }
         #endregion
 
         #region =================== costruttori ================
@@ -84,11 +103,23 @@ namespace NugetPackage.ViewModel
         #region =================== metodi generali ============
         protected void RegisterCommands()
         {
-            BrowseCommand = new DelegateCommand(OnBrowse, canBrowse);
-            SaveCommand = new DelegateCommand(OnSave, canSave);
+            BrowseCommand = new DelegateCommand(OnBrowse, CanBrowse);
+            SaveCommand = new DelegateCommand(OnSave, CanSave);
+            ShowCommand = new DelegateCommand(OnShow, CanShow);
         }
 
-        private bool canSave(object arg)
+        private bool CanShow(object arg)
+        {
+            return true;
+        }
+
+        private void OnShow(object obj)
+        {
+            string text = "" + NomePacchetto + "\nVersion: " + VersionePacchetto;
+            RisultatoPacchetto = text;
+        }
+
+        private bool CanSave(object arg)
         {
             return true;
         }
@@ -108,7 +139,7 @@ namespace NugetPackage.ViewModel
             }
         }
 
-        private bool canBrowse(object arg)
+        private bool CanBrowse(object arg)
         {
             return true;
         }

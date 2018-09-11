@@ -1,13 +1,7 @@
 ﻿using NuGet;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
 
 namespace NugetPackage.View
 {
@@ -52,13 +46,6 @@ namespace NugetPackage.View
             }
             // Invio dei dati nella listbox del WPF
             listNuget.ItemsSource = items;
-        }
-
-        private void listNuget_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Modificare la casella per vedere altri degli del pacchetto da installare
-            string text = "" + listNuget.SelectedItem + "\nVersion: " + versionNuget[listNuget.SelectedIndex];
-            version.Text = text;
         }
     }
 }

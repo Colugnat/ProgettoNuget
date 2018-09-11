@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NugetPackage.Model
 {
@@ -17,6 +13,7 @@ namespace NugetPackage.Model
 
         #region =================== membri & proprietà ===========
         public event PropertyChangedEventHandler PropertyChanged;
+
         private string percorso;
 
         public string Percorso
@@ -24,6 +21,7 @@ namespace NugetPackage.Model
             get { return percorso; }
             set { percorso = value; }
         }
+
         private string nomePacchetto;
 
         public string NomePacchetto
@@ -31,6 +29,7 @@ namespace NugetPackage.Model
             get { return nomePacchetto; }
             set { nomePacchetto = value; }
         }
+
         private string versionePacchetto;
 
         public string VersionePacchetto
@@ -38,6 +37,7 @@ namespace NugetPackage.Model
             get { return versionePacchetto; }
             set { versionePacchetto = value; }
         }
+
         private string contenutoPacchetto;
 
         public string ContenutoPacchetto
@@ -45,8 +45,15 @@ namespace NugetPackage.Model
             get { return contenutoPacchetto; }
             set { contenutoPacchetto = value; }
         }
+        private List<string> risultatoRicerca;
 
+        public List<string> RisultatoRicerca
+        {
+            get { return risultatoRicerca; }
+            set { risultatoRicerca = value; }
+        }
 
+        public string RisultatoPacchetto { get; set; }
         #endregion
 
         #region =================== costruttori ================
