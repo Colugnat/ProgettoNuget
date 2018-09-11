@@ -31,6 +31,21 @@ namespace NugetPackage.Model
             get { return nomePacchetto; }
             set { nomePacchetto = value; }
         }
+        private string versionePacchetto;
+
+        public string VersionePacchetto
+        {
+            get { return versionePacchetto; }
+            set { versionePacchetto = value; }
+        }
+        private string contenutoPacchetto;
+
+        public string ContenutoPacchetto
+        {
+            get { return contenutoPacchetto; }
+            set { contenutoPacchetto = value; }
+        }
+
 
         #endregion
 

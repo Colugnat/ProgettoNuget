@@ -54,21 +54,6 @@ namespace NugetPackage.View
             listNuget.ItemsSource = items;
         }
 
-        private void save_Click(object sender, RoutedEventArgs e)
-        {
-            // Creare il percorso per la creazione del file (nome.versione.nupkg)
-            string percorso = path.Text + "\\" + listNuget.SelectedItem + "." + versionNuget[listNuget.SelectedIndex] + ".nupkg";
-
-            // Verificare che il percorso esista è se non esiste si crea il percorso
-            if (!File.Exists(percorso))
-            {
-                // contenuto nel file nuget preso dall'array contentNuget
-                string createText = contentNuget[listNuget.SelectedIndex];
-                // Creare un file con il contenuto
-                File.WriteAllText(percorso, createText);
-            }
-        }
-
         private void listNuget_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Modificare la casella per vedere altri degli del pacchetto da installare

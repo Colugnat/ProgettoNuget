@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,9 +30,36 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("Percorso");
             }
         }
-
+        public string NomePacchetto
+        {
+            get { return model.NomePacchetto; }
+            set
+            {
+                model.NomePacchetto = value;
+                OnPropertyChanged("NomePacchetto");
+            }
+        }
+        public string VersionePacchetto
+        {
+            get { return model.VersionePacchetto; }
+            set
+            {
+                model.VersionePacchetto = value;
+                OnPropertyChanged("VersionePacchetto");
+            }
+        }
+        public string ContenutoPacchetto
+        {
+            get { return model.ContenutoPacchetto; }
+            set
+            {
+                model.ContenutoPacchetto = value;
+                OnPropertyChanged("ContenutoPacchetto");
+            }
+        }
 
         public IDelegateCommand BrowseCommand { get; protected set; }
+        public IDelegateCommand SaveCommand { get; protected set; }
         #endregion
 
         #region =================== costruttori ================
@@ -57,6 +85,27 @@ namespace NugetPackage.ViewModel
         protected void RegisterCommands()
         {
             BrowseCommand = new DelegateCommand(OnBrowse, canBrowse);
+            SaveCommand = new DelegateCommand(OnSave, canSave);
+        }
+
+        private bool canSave(object arg)
+        {
+            return true;
+        }
+
+        private void OnSave(object obj)
+        {
+            // Creare il percorso per la creazione del file (nome.versione.nupkg)
+            string percorso = Percorso + "\\" + NomePacchetto + "." + VersionePacchetto + ".nupkg";
+
+            // Verificare che il percorso esista è se non esiste si crea il percorso
+            if (!File.Exists(percorso))
+            {
+                // contenuto nel file nuget preso dall'array contentNuget
+                string createText = ContenutoPacchetto;
+                // Creare un file con il contenuto
+                File.WriteAllText(percorso, createText);
+            }
         }
 
         private bool canBrowse(object arg)

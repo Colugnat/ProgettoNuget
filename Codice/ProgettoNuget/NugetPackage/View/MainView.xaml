@@ -13,9 +13,9 @@
         <TextBox HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="393" Name="path" Text="{Binding Path=Percorso}"/>
         <Button Content="Browse..." Name="browse" HorizontalAlignment="Left" Margin="400,10,0,0" VerticalAlignment="Top" Width="107" Height="23" Command="{Binding Path=BrowseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
         <TextBlock Text="Search: " FontSize="18" Name="search" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="60" Height="23"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="75,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="257" Name="input" KeyUp="input_KeyUp"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="75,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="257" Name="input" TextChanged="{Binding Path=BrowseCommand}"/>
         <ListBox HorizontalAlignment="Left" Height="200" Margin="10,70,0,0" VerticalAlignment="Top" Name="listNuget" Width="257" SelectionChanged="listNuget_SelectionChanged"/>
-        <TextBox HorizontalAlignment="Left" Height="100" Margin="272,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" Name="version"/>
-        <Button Content="Save" Name="save" HorizontalAlignment="Left" Margin="272,170,0,0" VerticalAlignment="Top" Width="233" Click="save_Click"/>
+        <TextBox HorizontalAlignment="Left" Height="100" Margin="272,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" Name="version" Text="{Binding Path=VersionePacchetto}"/>
+        <Button Content="Save" Name="save" HorizontalAlignment="Left" Margin="272,170,0,0" VerticalAlignment="Top" Width="233" Command="{Binding Path=SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
     </Grid>
 </UserControl>
