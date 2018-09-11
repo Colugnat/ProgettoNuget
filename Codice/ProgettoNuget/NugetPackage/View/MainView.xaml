@@ -11,8 +11,8 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="269*"/>
-            <ColumnDefinition Width="256*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -22,9 +22,9 @@
         <TextBox Height="23" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Width="390" Name="path" Text="{Binding Path=Percorso}" Grid.ColumnSpan="2"/>
         <Button Content="Browse..." Name="browse" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="128,0,0,0" Width="100" Command="{Binding Path=BrowseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Column="1"/>
         <TextBlock Text="Search: " FontSize="18" Name="search" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="24" Grid.Row="1" Margin="40,0,0,0"/>
-        <TextBox HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" Width="300" Name="input" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Center" Height="23" KeyUp="Input_KeyUp" VerticalAlignment="Center" Width="300" Name="input" Grid.Row="1" Grid.ColumnSpan="2"/>
         <ListBox Name="listNuget" DataContext="{Binding Path=RisultatoRicerca}" ItemsSource="{Binding Path=ShowCommand}" Grid.Row="2"/>
-        <TextBox Name="version" Margin="10, 0, 0, 0" Text="{Binding Path=RisultatoPacchetto, Mode=OneWay}" Grid.Row="2" Grid.Column="1"/>
+        <TextBox Name="version" IsEnabled="False" Margin="10, 0, 0, 0" Text="{Binding Path=RisultatoPacchetto, Mode=OneWay}" Grid.Row="2" Grid.Column="1"/>
         <Button Content="Save" Name="save" Margin="9, 0, 0, 0" VerticalAlignment="Bottom" Command="{Binding Path=SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Row="2" Grid.Column="1"/>
     </Grid>
 </UserControl>
