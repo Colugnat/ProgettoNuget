@@ -67,6 +67,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helper\DelegateCommand.cs" />
+    <Compile Include="Helper\IDelegateCommand.cs" />
     <Compile Include="Model\Nuget.cs" />
     <Compile Include="ViewModel\NugetViewModel.cs" />
     <Compile Include="View\MainView.xaml.cs">
@@ -118,7 +120,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helper\" />
     <Folder Include="Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

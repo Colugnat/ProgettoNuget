@@ -54,17 +54,6 @@ namespace NugetPackage.View
             listNuget.ItemsSource = items;
         }
 
-        private void browse_Click(object sender, RoutedEventArgs e)
-        {
-            // Codice che permette di aprire una finestra per scegliere il percorso
-            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
-            folderDialog.SelectedPath = "C:\\";
-
-            DialogResult result = folderDialog.ShowDialog();
-            if (result.ToString() == "OK")
-                path.Text = folderDialog.SelectedPath;
-        }
-
         private void save_Click(object sender, RoutedEventArgs e)
         {
             // Creare il percorso per la creazione del file (nome.versione.nupkg)

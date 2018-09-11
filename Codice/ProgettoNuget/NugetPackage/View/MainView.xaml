@@ -10,8 +10,8 @@
         <viewmodels:NugetViewModel></viewmodels:NugetViewModel>
     </UserControl.DataContext>
     <Grid>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="393" Name="path"/>
-        <Button Content="Browse..." Name="browse" HorizontalAlignment="Left" Margin="400,10,0,0" VerticalAlignment="Top" Width="107" Height="23" Click="browse_Click"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="393" Name="path" Text="{Binding Path=Percorso}"/>
+        <Button Content="Browse..." Name="browse" HorizontalAlignment="Left" Margin="400,10,0,0" VerticalAlignment="Top" Width="107" Height="23" Command="{Binding Path=BrowseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
         <TextBlock Text="Search: " FontSize="18" Name="search" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="60" Height="23"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="75,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="257" Name="input" KeyUp="input_KeyUp"/>
         <ListBox HorizontalAlignment="Left" Height="200" Margin="10,70,0,0" VerticalAlignment="Top" Name="listNuget" Width="257" SelectionChanged="listNuget_SelectionChanged"/>
