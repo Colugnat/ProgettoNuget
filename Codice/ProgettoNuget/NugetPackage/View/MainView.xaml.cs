@@ -14,8 +14,6 @@ namespace NugetPackage.View
         {
             InitializeComponent();
         }
-        string[] contentNuget;
-        string[] versionNuget;
         private void Input_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             //// stringa del pacchetto che si deve cercare
@@ -46,13 +44,15 @@ namespace NugetPackage.View
             //}
             //// Invio dei dati nella listbox del WPF
             //listNuget.ItemsSource = items;
-        List<string> items = new List<string>();
-        items.Add("ciao");
-        items.Add("ciao1");
-        items.Add("ciao2");
-        items.Add("ciao3");
-        // Invio dei dati nella listbox del WPF
-        listNuget.ItemsSource = items;
+            List<string> items = new List<string>
+            {
+                "ciao",
+                "ciao1",
+                "ciao2",
+                "ciao3"
+            };
+            // Invio dei dati nella listbox del WPF
+            listNuget.ItemsSource = items;
         }
     }
 }

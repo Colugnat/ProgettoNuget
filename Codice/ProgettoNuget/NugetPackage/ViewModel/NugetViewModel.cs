@@ -79,6 +79,7 @@ namespace NugetPackage.ViewModel
         public IDelegateCommand BrowseCommand { get; protected set; }
         public IDelegateCommand SaveCommand { get; protected set; }
         public IDelegateCommand ShowCommand { get; protected set; }
+        public IDelegateCommand SearchCommand { get; protected set; }
         #endregion
 
         #region =================== costruttori ================
@@ -92,11 +93,7 @@ namespace NugetPackage.ViewModel
         #region =================== metodi aiuto ===============
         protected void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler h = PropertyChanged;
-            if (h != null)
-            {
-                h(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
 
@@ -106,6 +103,17 @@ namespace NugetPackage.ViewModel
             BrowseCommand = new DelegateCommand(OnBrowse, CanBrowse);
             SaveCommand = new DelegateCommand(OnSave, CanSave);
             ShowCommand = new DelegateCommand(OnShow, CanShow);
+            SearchCommand = new DelegateCommand(OnSearch, CanSearch);
+        }
+
+        private bool CanSearch(object arg)
+        {
+            return true;
+        }
+
+        private void OnSearch(object obj)
+        {
+            throw new NotImplementedException();
         }
 
         private bool CanShow(object arg)
@@ -148,8 +156,10 @@ namespace NugetPackage.ViewModel
         private void OnBrowse(object obj)
         {
             // Codice che permette di aprire una finestra per scegliere il percorso
-            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
-            folderDialog.SelectedPath = "C:\\";
+            FolderBrowserDialog folderDialog = new FolderBrowserDialog
+            {
+                SelectedPath = "C:\\"
+            };
 
             DialogResult result = folderDialog.ShowDialog();
             if (result.ToString() == "OK")

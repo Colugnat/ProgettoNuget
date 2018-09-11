@@ -62,11 +62,7 @@ namespace NugetPackage.Model
         #region =================== metodi aiuto ===============
         protected void OnPropertyChanged(string propertyName)
         {
-            PropertyChangedEventHandler h = PropertyChanged;
-            if (h != null)
-            {
-                h(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
 
