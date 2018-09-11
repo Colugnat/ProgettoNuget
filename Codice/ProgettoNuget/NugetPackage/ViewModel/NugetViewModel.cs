@@ -126,6 +126,10 @@ namespace NugetPackage.ViewModel
 
         private void OnSave(object obj)
         {
+            if (Percorso == null)
+            {
+                Percorso = "C:\\ciao";
+            }
             // Creare il percorso per la creazione del file (nome.versione.nupkg)
             string percorso = Percorso + "\\" + NomePacchetto + "." + VersionePacchetto + ".nupkg";
 
