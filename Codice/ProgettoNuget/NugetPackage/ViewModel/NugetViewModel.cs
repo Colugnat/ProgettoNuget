@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace NugetPackage.ViewModel
 {
-    class NugetViewModel : INotifyPropertyChanged
+    public class NugetViewModel : INotifyPropertyChanged
     {
         #region =================== costanti ===================
         #endregion
@@ -54,7 +54,6 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("ContenutoPacchetto");
             }
         }
-    
         public List<string> RisultatoRicerca
         {
             get { return model.RisultatoRicerca; }
@@ -64,7 +63,6 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("RisultatoRicerca");
             }
         }
-
         public string RisultatoPacchetto
         {
             get { return model.RisultatoPacchetto; }
@@ -74,8 +72,7 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("RisultatoPacchetto");
             }
         }
-
-
+        
         public IDelegateCommand BrowseCommand { get; protected set; }
         public IDelegateCommand SaveCommand { get; protected set; }
         public IDelegateCommand ShowCommand { get; protected set; }

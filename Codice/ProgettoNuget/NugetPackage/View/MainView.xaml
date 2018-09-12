@@ -6,9 +6,6 @@
              xmlns:local="clr-namespace:NugetPackage.View"
              xmlns:viewmodels="clr-namespace:NugetPackage.ViewModel"
              mc:Ignorable="d" Height="350" Width="525">
-    <UserControl.DataContext>
-        <viewmodels:NugetViewModel></viewmodels:NugetViewModel>
-    </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
