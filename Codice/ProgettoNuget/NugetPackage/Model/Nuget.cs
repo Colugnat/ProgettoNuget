@@ -53,6 +53,14 @@ namespace NugetPackage.Model
             set { risultatoRicerca = value; }
         }
 
+        private string inizioRicerca;
+
+        public string InizioRicerca
+        {
+            get { return inizioRicerca; }
+            set { inizioRicerca = value; }
+        }
+
         public string RisultatoPacchetto { get; set; }
         #endregion
 

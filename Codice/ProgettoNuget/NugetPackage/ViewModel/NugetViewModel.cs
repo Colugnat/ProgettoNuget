@@ -1,8 +1,10 @@
-﻿using NugetPackage.Model;
+﻿using NuGet;
+using NugetPackage.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace NugetPackage.ViewModel
@@ -72,7 +74,15 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("RisultatoPacchetto");
             }
         }
-
+        public string InizioRicerca
+        {
+            get { return model.InizioRicerca; }
+            set
+            {
+                model.InizioRicerca = value;
+                OnPropertyChanged("InizioRicerca");
+            }
+        }
         public IDelegateCommand BrowseCommand { get; protected set; }
         public IDelegateCommand SaveCommand { get; protected set; }
         public IDelegateCommand ShowCommand { get; protected set; }
@@ -110,7 +120,24 @@ namespace NugetPackage.ViewModel
 
         private void OnSearch(object obj)
         {
-            throw new NotImplementedException();
+            //ID of the package to be looked up
+            string packageID = InizioRicerca;
+
+            //Connect to the official package repository
+            IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+
+            //Get the list of all NuGet packages with ID 'EntityFramework'       
+            List<IPackage> packages = repo.Search(packageID, false).Take(12).ToList();
+
+            // Crea una lista
+            RisultatoRicerca = new List<string>();
+
+            // Riempimento degli array e della lista
+            foreach (IPackage p in packages)
+            {
+                RisultatoRicerca.Add(p.Id);
+            }
+            OnPropertyChanged("RisultatoRicerca");
         }
 
         private bool CanShow(object arg)
