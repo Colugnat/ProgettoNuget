@@ -72,7 +72,7 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("RisultatoPacchetto");
             }
         }
-        
+
         public IDelegateCommand BrowseCommand { get; protected set; }
         public IDelegateCommand SaveCommand { get; protected set; }
         public IDelegateCommand ShowCommand { get; protected set; }

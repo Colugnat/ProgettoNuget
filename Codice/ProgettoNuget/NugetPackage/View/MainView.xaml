@@ -5,7 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NugetPackage.View"
              xmlns:viewmodels="clr-namespace:NugetPackage.ViewModel"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" Height="350" Width="525">
+    <UserControl.DataContext>
+        <viewmodels:NugetViewModel></viewmodels:NugetViewModel>
+    </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -20,7 +24,13 @@
         <Button Content="Browse..." Name="browse" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="128,0,0,0" Width="100" Command="{Binding Path=BrowseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Column="1"/>
         <TextBlock Text="Search: " FontSize="18" Name="search" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="24" Grid.Row="1" Margin="40,0,0,0"/>
         <TextBox HorizontalAlignment="Center" Height="23" KeyUp="Input_KeyUp" VerticalAlignment="Center" Width="300" Name="input" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <ListBox Name="listNuget" DataContext="{Binding Path=RisultatoRicerca}" ItemsSource="{Binding Path=ShowCommand}" Grid.Row="2"/>
+        <ListBox Name="listNuget" DataContext="{Binding Path=RisultatoRicerca}" Grid.Row="2">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding ShowCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>
         <TextBox Name="version" IsEnabled="False" Margin="10, 0, 0, 0" Text="{Binding Path=RisultatoPacchetto, Mode=OneWay}" Grid.Row="2" Grid.Column="1"/>
         <Button Content="Save" Name="save" Margin="9, 0, 0, 0" VerticalAlignment="Bottom" Command="{Binding Path=SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Row="2" Grid.Column="1"/>
     </Grid>
