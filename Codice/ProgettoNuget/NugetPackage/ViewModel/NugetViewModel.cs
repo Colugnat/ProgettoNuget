@@ -128,7 +128,7 @@ namespace NugetPackage.ViewModel
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
 
             //Get the list of all NuGet packages with ID 'EntityFramework'       
-            List<IPackage> packages = repo.Search(packageID, false).Take(12).ToList();
+            List<IPackage> packages = repo.Search(packageID, false).Take(20).ToList();
 
             // Crea una lista
             RisultatoRicerca = new List<string>();

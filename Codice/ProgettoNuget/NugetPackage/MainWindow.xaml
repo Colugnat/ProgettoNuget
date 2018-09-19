@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:NugetPackage"
         xmlns:view="clr-namespace:NugetPackage.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="550" ResizeMode="NoResize">
+        Title="MainWindow" Height="600" Width="750" ResizeMode="NoResize">
     <Grid>
         <view:MainView/>
     </Grid>
