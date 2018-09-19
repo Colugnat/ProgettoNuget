@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace NugetPackage.ViewModel
@@ -151,12 +152,9 @@ namespace NugetPackage.ViewModel
             //Connect to the official package repository
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
             var version = repo.FindPackagesById(packageID).Max(p => p.Version);
-            //var content = repo.Search(packageID, false).First();
-            //ContenutoPacchetto = content.ExtractContents();
-           // Console.WriteLine(ContenutoPacchetto.ToArray());
-            //OnPropertyChanged("ContenutoPacchetto");
             VersionePacchetto = version.ToString();
             OnPropertyChanged("VersionePacchetto");
+            FrameworkName frameworkName = new FrameworkName("Anything", new Version("4.0"));
             string text = "Name: " + NomePacchetto + "\nVersion: " + VersionePacchetto;
             RisultatoPacchetto = text;
             OnPropertyChanged("RisultatoPacchetto");
