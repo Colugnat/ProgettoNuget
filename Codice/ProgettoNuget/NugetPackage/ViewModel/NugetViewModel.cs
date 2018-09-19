@@ -24,8 +24,7 @@ namespace NugetPackage.ViewModel
         public string Percorso
         {
             get { return model.Percorso; }
-            set
-            {
+            set {
                 model.Percorso = value;
                 OnPropertyChanged("Percorso");
             }
@@ -33,8 +32,7 @@ namespace NugetPackage.ViewModel
         public string NomePacchetto
         {
             get { return model.NomePacchetto; }
-            set
-            {
+            set {
                 model.NomePacchetto = value;
                 OnPropertyChanged("NomePacchetto");
             }
@@ -42,8 +40,7 @@ namespace NugetPackage.ViewModel
         public string VersionePacchetto
         {
             get { return model.VersionePacchetto; }
-            set
-            {
+            set {
                 model.VersionePacchetto = value;
                 OnPropertyChanged("VersionePacchetto");
             }
@@ -51,8 +48,7 @@ namespace NugetPackage.ViewModel
         public List<string> RisultatoRicerca
         {
             get { return model.RisultatoRicerca; }
-            set
-            {
+            set {
                 model.RisultatoRicerca = value;
                 OnPropertyChanged("RisultatoRicerca");
             }
@@ -60,8 +56,7 @@ namespace NugetPackage.ViewModel
         public string RisultatoPacchetto
         {
             get { return model.RisultatoPacchetto; }
-            set
-            {
+            set {
                 model.RisultatoPacchetto = value;
                 OnPropertyChanged("RisultatoPacchetto");
             }
@@ -69,8 +64,7 @@ namespace NugetPackage.ViewModel
         public string InizioRicerca
         {
             get { return model.InizioRicerca; }
-            set
-            {
+            set {
                 model.InizioRicerca = value;
                 OnPropertyChanged("InizioRicerca");
             }
@@ -160,8 +154,7 @@ namespace NugetPackage.ViewModel
         private void OnSave(object obj)
         {
             // Verificare che il percorso esista è se non esiste si crea il percorso
-            if (!File.Exists(Percorso))
-            {
+            if (!File.Exists(Percorso)) {
                 // Creare un file con il contenuto
                 IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
                 PackageManager packageManager = new PackageManager(repo, Percorso);
@@ -177,14 +170,12 @@ namespace NugetPackage.ViewModel
         private void OnBrowse(object obj)
         {
             // Codice che permette di aprire una finestra per scegliere il percorso per salvare il pacchetto Nuget
-            FolderBrowserDialog folderDialog = new FolderBrowserDialog
-            {
+            FolderBrowserDialog folderDialog = new FolderBrowserDialog {
                 SelectedPath = "C:\\"
             };
 
             DialogResult result = folderDialog.ShowDialog();
-            if (result.ToString() == "OK")
-            {
+            if (result.ToString() == "OK") {
                 Percorso = folderDialog.SelectedPath;
                 OnPropertyChanged("Percorso");
             }
