@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NuGet;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace NugetPackage.Model
@@ -38,9 +39,9 @@ namespace NugetPackage.Model
             set { versionePacchetto = value; }
         }
 
-        private string contenutoPacchetto;
+        private IEnumerable<IPackageFile> contenutoPacchetto;
 
-        public string ContenutoPacchetto
+        public IEnumerable<IPackageFile> ContenutoPacchetto
         {
             get { return contenutoPacchetto; }
             set { contenutoPacchetto = value; }

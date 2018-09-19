@@ -14,11 +14,6 @@ namespace NugetPackage.View
         {
             InitializeComponent();
         }
-
-        private void input_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-
-        }
         //private void Input_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         //{
         //    //ID of the package to be looked up

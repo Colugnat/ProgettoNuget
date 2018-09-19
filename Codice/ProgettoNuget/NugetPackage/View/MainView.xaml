@@ -30,7 +30,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>
-        <ListBox Name="listNuget" ItemsSource="{Binding Path=RisultatoRicerca}" Grid.Row="2">
+        <ListBox Name="listNuget" ItemsSource="{Binding Path=RisultatoRicerca}" SelectedItem="{Binding Path=NomePacchetto}" Grid.Row="2">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseLeftButtonUp">
                     <i:InvokeCommandAction Command="{Binding Path=ShowCommand}"/>

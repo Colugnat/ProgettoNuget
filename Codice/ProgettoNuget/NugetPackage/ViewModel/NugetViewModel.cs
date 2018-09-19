@@ -47,7 +47,7 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("VersionePacchetto");
             }
         }
-        public string ContenutoPacchetto
+        public IEnumerable<IPackageFile> ContenutoPacchetto
         {
             get { return model.ContenutoPacchetto; }
             set
@@ -147,7 +147,17 @@ namespace NugetPackage.ViewModel
 
         private void OnShow(object obj)
         {
-            string text = "" + NomePacchetto + "\nVersion: " + VersionePacchetto;
+            string packageID = NomePacchetto;
+            //Connect to the official package repository
+            IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+            var version = repo.FindPackagesById(packageID).Max(p => p.Version);
+            //var content = repo.Search(packageID, false).First();
+            //ContenutoPacchetto = content.ExtractContents();
+           // Console.WriteLine(ContenutoPacchetto.ToArray());
+            //OnPropertyChanged("ContenutoPacchetto");
+            VersionePacchetto = version.ToString();
+            OnPropertyChanged("VersionePacchetto");
+            string text = "Name: " + NomePacchetto + "\nVersion: " + VersionePacchetto;
             RisultatoPacchetto = text;
             OnPropertyChanged("RisultatoPacchetto");
         }
@@ -157,18 +167,17 @@ namespace NugetPackage.ViewModel
             return true;
         }
 
+
+
         private void OnSave(object obj)
         {
-            // Creare il percorso per la creazione del file (nome.versione.nupkg)
-            string percorso = Percorso + "\\" + NomePacchetto + "." + VersionePacchetto + ".nupkg";
-
             // Verificare che il percorso esista è se non esiste si crea il percorso
-            if (!File.Exists(percorso))
+            if (!File.Exists(Percorso))
             {
-                // contenuto nel file nuget preso dall'array contentNuget
-                string createText = ContenutoPacchetto;
                 // Creare un file con il contenuto
-                File.WriteAllText(percorso, createText);
+                IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+                PackageManager packageManager = new PackageManager(repo, Percorso);
+                packageManager.InstallPackage(NomePacchetto, SemanticVersion.Parse(VersionePacchetto));
             }
         }
 
