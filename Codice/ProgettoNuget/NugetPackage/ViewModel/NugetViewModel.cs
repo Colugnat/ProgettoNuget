@@ -176,7 +176,7 @@ namespace NugetPackage.ViewModel
 
         private void OnBrowse(object obj)
         {
-            // Codice che permette di aprire una finestra per scegliere il percorso
+            // Codice che permette di aprire una finestra per scegliere il percorso per salvare il pacchetto Nuget
             FolderBrowserDialog folderDialog = new FolderBrowserDialog
             {
                 SelectedPath = "C:\\"
