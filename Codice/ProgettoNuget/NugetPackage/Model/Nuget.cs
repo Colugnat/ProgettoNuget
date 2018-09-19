@@ -1,5 +1,4 @@
-﻿using NuGet;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace NugetPackage.Model
@@ -14,47 +13,11 @@ namespace NugetPackage.Model
 
         #region =================== membri & proprietà ===========
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private string percorso;
-
-        public string Percorso
-        {
-            get { return percorso; }
-            set { percorso = value; }
-        }
-
-        private string nomePacchetto;
-
-        public string NomePacchetto
-        {
-            get { return nomePacchetto; }
-            set { nomePacchetto = value; }
-        }
-
-        private string versionePacchetto;
-
-        public string VersionePacchetto
-        {
-            get { return versionePacchetto; }
-            set { versionePacchetto = value; }
-        }
-
-        private List<string> risultatoRicerca;
-
-        public List<string> RisultatoRicerca
-        {
-            get { return risultatoRicerca; }
-            set { risultatoRicerca = value; }
-        }
-
-        private string inizioRicerca;
-
-        public string InizioRicerca
-        {
-            get { return inizioRicerca; }
-            set { inizioRicerca = value; }
-        }
-
+        public string Percorso { get; set; }
+        public string NomePacchetto { get; set; }
+        public string VersionePacchetto { get; set; }
+        public List<string> RisultatoRicerca { get; set; }
+        public string InizioRicerca { get; set; }
         public string RisultatoPacchetto { get; set; }
         #endregion
 

@@ -140,11 +140,8 @@ namespace NugetPackage.ViewModel
         private void OnShow(object obj)
         {
             string packageID = NomePacchetto;
-            //Connect to the official package repository
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-           // var version = repo.FindPackagesById(packageID).First().Version;
-           var version = repo.Search(packageID, false).First().Version;
-            VersionePacchetto = version.ToString();
+            VersionePacchetto = repo.Search(packageID, false).First().Version.ToString();
             OnPropertyChanged("VersionePacchetto");
             var descizione = repo.FindPackagesById(packageID).First().Description.ToString();
             FrameworkName frameworkName = new FrameworkName("Anything", new Version("4.0"));
