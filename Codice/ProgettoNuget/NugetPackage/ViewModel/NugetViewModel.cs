@@ -142,7 +142,8 @@ namespace NugetPackage.ViewModel
             string packageID = NomePacchetto;
             //Connect to the official package repository
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-            var version = repo.FindPackagesById(packageID).Max(p => p.Version);
+           // var version = repo.FindPackagesById(packageID).First().Version;
+           var version = repo.Search(packageID, false).First().Version;
             VersionePacchetto = version.ToString();
             OnPropertyChanged("VersionePacchetto");
             var descizione = repo.FindPackagesById(packageID).First().Description.ToString();
