@@ -38,6 +38,6 @@
             </i:Interaction.Triggers>
         </ListBox>
         <TextBox Name="version" IsReadOnly="True" Margin="10,0,0,20" Text="{Binding Path=RisultatoPacchetto, Mode=OneWay}" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
-        <Button Content="Save" Name="save" Margin="9, 0, 0, 0" VerticalAlignment="Bottom" Command="{Binding Path=SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Row="2" Grid.Column="1"/>
+        <Button Content="Save" Name="save" Margin="10,0,0,0" VerticalAlignment="Bottom" Command="{Binding Path=SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Row="2" Grid.Column="1"/>
     </Grid>
 </UserControl>
