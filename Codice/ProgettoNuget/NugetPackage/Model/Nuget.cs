@@ -39,13 +39,6 @@ namespace NugetPackage.Model
             set { versionePacchetto = value; }
         }
 
-        private IEnumerable<IPackageFile> contenutoPacchetto;
-
-        public IEnumerable<IPackageFile> ContenutoPacchetto
-        {
-            get { return contenutoPacchetto; }
-            set { contenutoPacchetto = value; }
-        }
         private List<string> risultatoRicerca;
 
         public List<string> RisultatoRicerca

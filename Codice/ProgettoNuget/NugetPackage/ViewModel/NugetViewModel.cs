@@ -48,15 +48,6 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("VersionePacchetto");
             }
         }
-        public IEnumerable<IPackageFile> ContenutoPacchetto
-        {
-            get { return model.ContenutoPacchetto; }
-            set
-            {
-                model.ContenutoPacchetto = value;
-                OnPropertyChanged("ContenutoPacchetto");
-            }
-        }
         public List<string> RisultatoRicerca
         {
             get { return model.RisultatoRicerca; }
@@ -154,8 +145,9 @@ namespace NugetPackage.ViewModel
             var version = repo.FindPackagesById(packageID).Max(p => p.Version);
             VersionePacchetto = version.ToString();
             OnPropertyChanged("VersionePacchetto");
+            var descizione = repo.FindPackagesById(packageID).First().Description.ToString();
             FrameworkName frameworkName = new FrameworkName("Anything", new Version("4.0"));
-            string text = "Name: " + NomePacchetto + "\nVersion: " + VersionePacchetto;
+            string text = "Name: " + NomePacchetto + "\nVersion: " + VersionePacchetto + "\nDescription: \n" + descizione;
             RisultatoPacchetto = text;
             OnPropertyChanged("RisultatoPacchetto");
         }
