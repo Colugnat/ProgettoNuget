@@ -102,6 +102,7 @@ namespace NugetPackage.ViewModel
         private bool CanSearch(object arg)
         {
             return true;
+            // No exception
         }
 
         private void OnSearch(object obj)
@@ -125,10 +126,10 @@ namespace NugetPackage.ViewModel
             }
             OnPropertyChanged("RisultatoRicerca");
         }
-
         private bool CanShow(object arg)
         {
             return true;
+            //System.InvalidOperationException
         }
 
         private void OnShow(object obj)
@@ -147,10 +148,8 @@ namespace NugetPackage.ViewModel
         private bool CanSave(object arg)
         {
             return true;
+            //System.ArgumentException
         }
-
-
-
         private void OnSave(object obj)
         {
             // Verificare che il percorso esista è se non esiste si crea il percorso
