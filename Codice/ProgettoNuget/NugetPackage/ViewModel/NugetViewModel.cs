@@ -165,8 +165,11 @@ namespace NugetPackage.ViewModel
 
         private bool CanSave(object arg)
         {
-
-             return true;
+            string defaultPath = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
+            defaultPath = Path.Combine(defaultPath, "Downloads");
+            if (Percorso == null)
+                Percorso = defaultPath;
+            return true;
             //System.ArgumentException
         }
         private void OnSave(object obj)
@@ -174,6 +177,10 @@ namespace NugetPackage.ViewModel
             // Verificare che il percorso esista è se non esiste si crea il percorso
             if (!File.Exists(Percorso)) {
                 // Creare un file con il contenuto
+                string defaultPath = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
+                defaultPath = Path.Combine(defaultPath, "Downloads");
+                if (Percorso == "")
+                    Percorso = defaultPath;
                 IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
                 PackageManager packageManager = new PackageManager(repo, Percorso);
                 packageManager.InstallPackage(NomePacchetto, SemanticVersion.Parse(VersionePacchetto));
