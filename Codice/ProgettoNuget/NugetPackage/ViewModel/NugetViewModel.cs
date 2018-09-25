@@ -180,14 +180,14 @@ namespace NugetPackage.ViewModel
             // Controllo se il percorso è vuoto
             if (Percorso == null)
             {
-                if (File.ReadAllText("logFile.txt") == "")
+                if (File.ReadAllText("logFilePath.txt") == "")
                 {
                     
                     Percorso = defaultPath;
-                    File.WriteAllText("logFile.txt", Percorso);
+                    File.WriteAllText("logFilePath.txt", Percorso);
                 }
                 else
-                    Percorso = File.ReadAllText("logFile.txt");
+                    Percorso = File.ReadAllText("logFilePath.txt");
             }
             return true;
             //System.ArgumentException
@@ -234,7 +234,7 @@ namespace NugetPackage.ViewModel
             if (result.ToString() == "OK") {
                 Percorso = folderDialog.SelectedPath;
                 OnPropertyChanged("Percorso");
-                File.WriteAllText("logFile.txt", Percorso);
+                File.WriteAllText("logFilePath.txt", Percorso);
                 RisultatoLog += "Selezionato il percorso " + Percorso + "\n";
                 OnPropertyChanged("RisultatoLog");
             }
