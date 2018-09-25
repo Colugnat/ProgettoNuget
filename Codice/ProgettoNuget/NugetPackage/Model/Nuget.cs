@@ -19,6 +19,7 @@ namespace NugetPackage.Model
         public List<string> RisultatoRicerca { get; set; }
         public string InizioRicerca { get; set; }
         public string RisultatoPacchetto { get; set; }
+        public string RisultatoLog { get; set; }
         #endregion
 
         #region =================== costruttori ================

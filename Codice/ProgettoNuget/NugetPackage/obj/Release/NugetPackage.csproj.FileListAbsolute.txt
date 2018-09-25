@@ -1,0 +1,26 @@
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\01 BaseMVVM.exe.config
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\01 BaseMVVM.exe
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\01 BaseMVVM.pdb
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\Microsoft.Expression.Interactions.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\Microsoft.Web.XmlTransform.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\Newtonsoft.Json.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\NuGet.Core.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\System.Windows.Interactivity.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\WPFFolderBrowser.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\Microsoft.Expression.Interactions.xml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\Newtonsoft.Json.xml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\System.Windows.Interactivity.xml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\MainWindow.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\View\MainView.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\App.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\GeneratedInternalTypeHelper.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\01 BaseMVVM_MarkupCompile.cache
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\01 BaseMVVM_MarkupCompile.lref
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\MainWindow.baml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\View\MainView.baml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\01 BaseMVVM.g.resources
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\NugetPackage.Properties.Resources.resources
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\NugetPackage.csproj.GenerateResource.Cache
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\NugetPackage.csproj.CoreCompileInputs.cache
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\01 BaseMVVM.exe
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\01 BaseMVVM.pdb

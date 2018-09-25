@@ -69,6 +69,15 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("InizioRicerca");
             }
         }
+        public string RisultatoLog
+        {
+            get { return model.RisultatoLog; }
+            set
+            {
+                model.RisultatoLog = value;
+                OnPropertyChanged("RisultatoLog");
+            }
+        }
         public IDelegateCommand BrowseCommand { get; protected set; }
         public IDelegateCommand SaveCommand { get; protected set; }
         public IDelegateCommand ShowCommand { get; protected set; }
@@ -129,7 +138,11 @@ namespace NugetPackage.ViewModel
         private bool CanShow(object arg)
         {
             if (NomePacchetto == null)
+            {
+                RisultatoLog += "Nessun pacchetto selezionato\n";
+                OnPropertyChanged("RisultatoLog");
                 return false;
+            }
             else
                 return true;
             //System.InvalidOperationException
@@ -146,6 +159,8 @@ namespace NugetPackage.ViewModel
             string text = "Name: " + NomePacchetto + "\nVersion: " + VersionePacchetto + "\nDescription: \n" + descizione;
             RisultatoPacchetto = text;
             OnPropertyChanged("RisultatoPacchetto");
+            RisultatoLog += "Selezionato pacchetto " + NomePacchetto + "\n";
+            OnPropertyChanged("RisultatoLog");
         }
 
         private bool CanSave(object arg)
@@ -162,6 +177,8 @@ namespace NugetPackage.ViewModel
                 IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
                 PackageManager packageManager = new PackageManager(repo, Percorso);
                 packageManager.InstallPackage(NomePacchetto, SemanticVersion.Parse(VersionePacchetto));
+                RisultatoLog += "Pacchetto " + NomePacchetto + " salvato con le rispettive dipendenze nel percorso " + Percorso + "\n";
+                OnPropertyChanged("RisultatoLog");
             }
         }
 
@@ -182,6 +199,8 @@ namespace NugetPackage.ViewModel
             if (result.ToString() == "OK") {
                 Percorso = folderDialog.SelectedPath;
                 OnPropertyChanged("Percorso");
+                RisultatoLog += "Selezionato il percorso " + Percorso + "\n";
+                OnPropertyChanged("RisultatoLog");
             }
         }
         #endregion
