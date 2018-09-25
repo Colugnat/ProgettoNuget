@@ -179,7 +179,7 @@ namespace NugetPackage.ViewModel
                 // Creare un file con il contenuto
                 string defaultPath = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
                 defaultPath = Path.Combine(defaultPath, "Downloads");
-                if (Percorso == "")
+                if (Percorso == "" || Percorso == null)
                     Percorso = defaultPath;
                 IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
                 PackageManager packageManager = new PackageManager(repo, Percorso);
