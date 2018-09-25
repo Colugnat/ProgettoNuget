@@ -123,7 +123,7 @@ namespace NugetPackage.ViewModel
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
 
             // Ricevere la lista di tutti i pacchetti trovati dalla ricerca  
-            List<IPackage> packages = repo.Search(packageID, false).Take(17).ToList();
+            List<IPackage> packages = repo.Search(packageID, false).Take(14).ToList();
 
             // Crea una lista
             RisultatoRicerca = new List<string>();
@@ -160,7 +160,11 @@ namespace NugetPackage.ViewModel
             // Descrizione del pacchetto selezionato
             var descizione = repo.FindPackagesById(packageID).First().Description.ToString();
             // Creazione della stringa dettagliata con le informazione sul pacchetto corrente
-            string text = "Name: " + NomePacchetto + "\nVersion: " + VersionePacchetto + "\nDescription: \n" + descizione;
+            FrameworkName frameworkName = new FrameworkName("Anything", new Version("3.5"));
+            string dependency = string.Join("\n - ", repo.Search(packageID, false).First().GetCompatiblePackageDependencies(frameworkName).Select(x => x));
+            if (dependency == "")
+                dependency = "No dependency";
+            string text = "Name: " + NomePacchetto + "\nVersion: " + VersionePacchetto + "\nDescription: \n" + descizione + "\nDependency: \n - " + dependency;
             RisultatoPacchetto = text;
             OnPropertyChanged("RisultatoPacchetto");
             // Informazione di ciò che è accaduto all'utente che sta utilizzando il programma

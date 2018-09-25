@@ -21,24 +21,24 @@
             <RowDefinition Height="6*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <TextBox Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Width="620" Name="path" Text="{Binding Path=Percorso}" Grid.ColumnSpan="2"/>
-        <Button Content="Browse..." Name="browse" HorizontalAlignment="Right" VerticalAlignment="Center" Width="100" Command="{Binding Path=BrowseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Column="1" Height="20"/>
+        <TextBox Height="20" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Width="620" Name="path" Text="{Binding Path=Percorso}" Grid.ColumnSpan="2"/>
+        <Button FontSize="15" Content="Browse..." Name="browse" HorizontalAlignment="Right" VerticalAlignment="Center" Width="100" Command="{Binding Path=BrowseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Column="1" Height="20"/>
         <TextBlock Text="Search: " FontSize="18" Name="search" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="24" Grid.Row="1" Margin="70,0,0,0"/>
-        <TextBox HorizontalAlignment="Center" Text="{Binding Path=InizioRicerca, UpdateSourceTrigger=PropertyChanged}" Height="22" VerticalAlignment="Center" Width="430" Name="input" Grid.Row="1" Grid.ColumnSpan="2">
+        <TextBox FontSize="15" HorizontalAlignment="Center" Text="{Binding Path=InizioRicerca, UpdateSourceTrigger=PropertyChanged}" Height="22" VerticalAlignment="Center" Width="430" Name="input" Grid.Row="1" Grid.ColumnSpan="2">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="KeyUp">
                     <i:InvokeCommandAction Command="{Binding Path=SearchCommand}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>
-        <ListBox Name="listNuget" ItemsSource="{Binding Path=RisultatoRicerca}" SelectedItem="{Binding Path=NomePacchetto}" Grid.Row="2">
+        <ListBox FontSize="15" Name="listNuget" ItemsSource="{Binding Path=RisultatoRicerca}" SelectedItem="{Binding Path=NomePacchetto}" Grid.Row="2">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseLeftButtonUp">
                     <i:InvokeCommandAction Command="{Binding Path=ShowCommand}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListBox>
-        <TextBox Name="version" IsReadOnly="True" Margin="10,0,0,0" Text="{Binding Path=RisultatoPacchetto, Mode=OneWay}" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+        <TextBox FontSize="15" Name="version" IsReadOnly="True" Margin="10,0,0,0" Text="{Binding Path=RisultatoPacchetto, Mode=OneWay}" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
         <Button Content="Save" Name="save" Margin="10,0,0,0" VerticalAlignment="Bottom" Command="{Binding Path=SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Row="2" Grid.Column="1" Height="20"/>
         <TextBox FontSize="15" Name="logArea" Grid.Row="3" Grid.ColumnSpan="2" Margin="0, 5, 0, 5" IsReadOnly="True" Text="{Binding Path=RisultatoLog, Mode=OneWay}" TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" TextChanged="logArea_TextChanged"/>
     </Grid>
