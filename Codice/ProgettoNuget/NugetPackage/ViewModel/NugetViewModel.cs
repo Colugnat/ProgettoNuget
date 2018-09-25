@@ -116,13 +116,13 @@ namespace NugetPackage.ViewModel
 
         private void OnSearch(object obj)
         {
-            //ID of the package to be looked up
+            // Id del pacchetto che si deve ricercare
             string packageID = InizioRicerca;
 
-            //Connect to the official package repository
+            // Connessione al databare dei Nuget package
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
 
-            //Get the list of all NuGet packages with ID 'EntityFramework'       
+            // Ricevere la lista di tutti i pacchetti trovati dalla ricerca  
             List<IPackage> packages = repo.Search(packageID, false).Take(17).ToList();
 
             // Crea una lista
@@ -137,6 +137,7 @@ namespace NugetPackage.ViewModel
         }
         private bool CanShow(object arg)
         {
+            // Controllo se l'utente preme in uno spazio vuoto nella Listbox
             if (NomePacchetto == null)
             {
                 RisultatoLog += "Nessun pacchetto selezionato\n";
@@ -151,22 +152,28 @@ namespace NugetPackage.ViewModel
         private void OnShow(object obj)
         {
             string packageID = NomePacchetto;
+            // Connessione con il database dei Nuget package
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+            // Versione del pacchetto selezionato
             VersionePacchetto = repo.Search(packageID, false).First().Version.ToString();
             OnPropertyChanged("VersionePacchetto");
+            // Descrizione del pacchetto selezionato
             var descizione = repo.FindPackagesById(packageID).First().Description.ToString();
-            FrameworkName frameworkName = new FrameworkName("Anything", new Version("4.0"));
+            // Creazione della stringa dettagliata con le informazione sul pacchetto corrente
             string text = "Name: " + NomePacchetto + "\nVersion: " + VersionePacchetto + "\nDescription: \n" + descizione;
             RisultatoPacchetto = text;
             OnPropertyChanged("RisultatoPacchetto");
+            // Informazione di ciò che è accaduto all'utente che sta utilizzando il programma
             RisultatoLog += "Selezionato pacchetto " + NomePacchetto + "\n";
             OnPropertyChanged("RisultatoLog");
         }
 
         private bool CanSave(object arg)
         {
+            // Creazione di un percorso di default in caso non ci sia un percorso scelto
             string defaultPath = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
             defaultPath = Path.Combine(defaultPath, "Downloads");
+            // Controllo se il percorso è vuoto
             if (Percorso == null)
                 Percorso = defaultPath;
             return true;
@@ -176,18 +183,22 @@ namespace NugetPackage.ViewModel
         {
             // Verificare che il percorso esista è se non esiste si crea il percorso
             if (!File.Exists(Percorso)) {
-                // Creare un file con il contenuto
+                // Creazione del percorso di default
                 string defaultPath = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
                 defaultPath = Path.Combine(defaultPath, "Downloads");
+                // Controllo se il percorso è vuoto oppure null
                 if (Percorso == "" || Percorso == null)
                 {
                     Percorso = defaultPath;
                     RisultatoLog += "Nessun percorso scelto, il pacchetto si salverà nel percorso di default (" + Percorso + ")\n";
                     OnPropertyChanged("RisultatoLog");
                 }
+                // Creazione al collegamento con Nuget package
                 IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
                 PackageManager packageManager = new PackageManager(repo, Percorso);
+                // Scaricamento del pacchetto zip è poi estrarlo nel percorso scelto
                 packageManager.InstallPackage(NomePacchetto, SemanticVersion.Parse(VersionePacchetto));
+                // Informazione per vedere quando il pacchetto ha finito di scaricare
                 RisultatoLog += "Pacchetto " + NomePacchetto + " salvato con le rispettive dipendenze nel percorso " + Percorso + "\n";
                 OnPropertyChanged("RisultatoLog");
             }
