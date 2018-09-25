@@ -179,7 +179,16 @@ namespace NugetPackage.ViewModel
             defaultPath = Path.Combine(defaultPath, "Downloads");
             // Controllo se il percorso è vuoto
             if (Percorso == null)
-                Percorso = defaultPath;
+            {
+                if (File.ReadAllText("logFile.txt") == "")
+                {
+                    
+                    Percorso = defaultPath;
+                    File.WriteAllText("logFile.txt", Percorso);
+                }
+                else
+                    Percorso = File.ReadAllText("logFile.txt");
+            }
             return true;
             //System.ArgumentException
         }
@@ -225,6 +234,7 @@ namespace NugetPackage.ViewModel
             if (result.ToString() == "OK") {
                 Percorso = folderDialog.SelectedPath;
                 OnPropertyChanged("Percorso");
+                File.WriteAllText("logFile.txt", Percorso);
                 RisultatoLog += "Selezionato il percorso " + Percorso + "\n";
                 OnPropertyChanged("RisultatoLog");
             }
