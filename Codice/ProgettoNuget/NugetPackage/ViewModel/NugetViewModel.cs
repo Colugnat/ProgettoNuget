@@ -180,7 +180,11 @@ namespace NugetPackage.ViewModel
                 string defaultPath = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
                 defaultPath = Path.Combine(defaultPath, "Downloads");
                 if (Percorso == "" || Percorso == null)
+                {
                     Percorso = defaultPath;
+                    RisultatoLog += "Nessun percorso scelto, il pacchetto si salverà nel percorso di default (" + Percorso + ")\n";
+                    OnPropertyChanged("RisultatoLog");
+                }
                 IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
                 PackageManager packageManager = new PackageManager(repo, Percorso);
                 packageManager.InstallPackage(NomePacchetto, SemanticVersion.Parse(VersionePacchetto));
