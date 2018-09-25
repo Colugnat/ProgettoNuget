@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:NugetPackage.View"
              xmlns:viewmodels="clr-namespace:NugetPackage.ViewModel"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             mc:Ignorable="d" Height="550" Width="725">
+             mc:Ignorable="d" Height="650" Width="725">
     <UserControl.DataContext>
         <viewmodels:NugetViewModel></viewmodels:NugetViewModel>
     </UserControl.DataContext>
@@ -19,11 +19,12 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="6*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <TextBox Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Width="552" Name="path" Text="{Binding Path=Percorso}" Grid.ColumnSpan="2" Margin="0,24,0,25"/>
-        <Button Content="Browse..." Name="browse" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="128,0,0,0" Width="100" Command="{Binding Path=BrowseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Column="1"/>
-        <TextBlock Text="Search: " FontSize="18" Name="search" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="24" Grid.Row="1" Margin="29,23,0,22"/>
-        <TextBox HorizontalAlignment="Center" Text="{Binding Path=InizioRicerca, UpdateSourceTrigger=PropertyChanged}" Height="23" VerticalAlignment="Center" Width="426" Name="input" Grid.Row="1" Grid.ColumnSpan="2" Margin="92,23,207,23" >
+        <TextBox Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Width="620" Name="path" Text="{Binding Path=Percorso}" Grid.ColumnSpan="2"/>
+        <Button Content="Browse..." Name="browse" HorizontalAlignment="Right" VerticalAlignment="Center" Width="100" Command="{Binding Path=BrowseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Column="1" Height="20"/>
+        <TextBlock Text="Search: " FontSize="18" Name="search" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="24" Grid.Row="1" Margin="67,22,0,22"/>
+        <TextBox HorizontalAlignment="Center" Text="{Binding Path=InizioRicerca, UpdateSourceTrigger=PropertyChanged}" Height="22" VerticalAlignment="Center" Width="426" Name="input" Grid.Row="1" Grid.ColumnSpan="2">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="KeyUp">
                     <i:InvokeCommandAction Command="{Binding Path=SearchCommand}"/>
@@ -38,6 +39,7 @@
             </i:Interaction.Triggers>
         </ListBox>
         <TextBox Name="version" IsReadOnly="True" Margin="10,0,0,20" Text="{Binding Path=RisultatoPacchetto, Mode=OneWay}" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
-        <Button Content="Save" Name="save" Margin="10,0,0,0" VerticalAlignment="Bottom" Command="{Binding Path=SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Row="2" Grid.Column="1"/>
+        <Button Content="Save" Name="save" Margin="10,0,0,0" VerticalAlignment="Bottom" Command="{Binding Path=SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Row="2" Grid.Column="1" Height="20"/>
+        <TextBox Name="logArea" Grid.Row="3" Grid.ColumnSpan="2" Margin="5" IsReadOnly="True"/>
     </Grid>
 </UserControl>

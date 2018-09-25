@@ -102,7 +102,7 @@ namespace NugetPackage.ViewModel
         private bool CanSearch(object arg)
         {
             return true;
-            // No exception
+            //No exception
         }
 
         private void OnSearch(object obj)
@@ -114,7 +114,7 @@ namespace NugetPackage.ViewModel
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
 
             //Get the list of all NuGet packages with ID 'EntityFramework'       
-            List<IPackage> packages = repo.Search(packageID, false).Take(20).ToList();
+            List<IPackage> packages = repo.Search(packageID, false).Take(17).ToList();
 
             // Crea una lista
             RisultatoRicerca = new List<string>();
@@ -128,7 +128,10 @@ namespace NugetPackage.ViewModel
         }
         private bool CanShow(object arg)
         {
-            return true;
+            if (NomePacchetto == null)
+                return false;
+            else
+                return true;
             //System.InvalidOperationException
         }
 
@@ -147,7 +150,8 @@ namespace NugetPackage.ViewModel
 
         private bool CanSave(object arg)
         {
-            return true;
+
+             return true;
             //System.ArgumentException
         }
         private void OnSave(object obj)
@@ -164,6 +168,7 @@ namespace NugetPackage.ViewModel
         private bool CanBrowse(object arg)
         {
             return true;
+            //No exception
         }
 
         private void OnBrowse(object obj)
