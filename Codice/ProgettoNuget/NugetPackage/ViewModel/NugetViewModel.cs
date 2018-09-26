@@ -120,6 +120,19 @@ namespace NugetPackage.ViewModel
         private void OnSearchNews(object obj)
         {
             //Console.WriteLine(File.ReadAllText("logFileNews.txt"));
+            if(File.Exists("logFileNews.txt"))
+            {
+                string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
+                foreach (string newsName in fileNewsContent)
+                {
+                    string[] getVersion = newsName.Split(':');
+                    Console.WriteLine(getVersion[2]);
+                }
+            }
+            else
+            {
+                File.Create("logFileNews.txt");
+            }
         }
 
         private bool CanShowNews(object arg)
@@ -242,7 +255,7 @@ namespace NugetPackage.ViewModel
                 PackageManager packageManager = new PackageManager(repo, Percorso);
                 // Scaricamento del pacchetto zip è poi estrarlo nel percorso scelto
                 packageManager.InstallPackage(NomePacchetto, SemanticVersion.Parse(VersionePacchetto));
-                string pathVersion = Percorso + "\\" + NomePacchetto + "." + VersionePacchetto + " : " + VersionePacchetto;
+                string pathVersion = Percorso + "\\" + NomePacchetto + "." + VersionePacchetto + ":" + VersionePacchetto;
                 string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
                 bool change = true;
                 if(fileNewsContent.Length == 0)
@@ -261,7 +274,6 @@ namespace NugetPackage.ViewModel
                     else
                         change = true;
                 }
-                
                 File.WriteAllText("logFilePath.txt", Percorso);
                 // Informazione per vedere quando il pacchetto ha finito di scaricare
                 RisultatoLog += "Pacchetto " + NomePacchetto + " salvato con le rispettive dipendenze nel percorso " + Percorso + "\n";
