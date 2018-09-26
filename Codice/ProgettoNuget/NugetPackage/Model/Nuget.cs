@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace NugetPackage.Model
@@ -17,8 +18,8 @@ namespace NugetPackage.Model
         public string NomePacchetto { get; set; }
         public string NomeNewsPacchetto { get; set; }
         public string VersionePacchetto { get; set; }
-        public List<string> RisultatoRicerca { get; set; }
-        public List<string> RisultatoRicercaNews { get; set; }
+        public ObservableCollection<string> RisultatoRicerca { get; set; }
+        public ObservableCollection<string> RisultatoRicercaNews { get; set; }
         public string InizioRicerca { get; set; }
         public string RisultatoPacchetto { get; set; }
         public string RisultatoLog { get; set; }
