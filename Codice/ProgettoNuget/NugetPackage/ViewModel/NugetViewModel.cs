@@ -135,7 +135,6 @@ namespace NugetPackage.ViewModel
                 foreach (string newsName in fileNewsContent)
                 {
                     string[] getVersion = newsName.Split(':');
-                    //////////////////////////////////////////Console.WriteLine(getVersion[2]);
                     string[] nameCurrentId = getVersion[1].Split('\\');
                     // Id del pacchetto che si deve ricercare
                     string packageID = nameCurrentId[nameCurrentId.Length - 1].Split('.')[0];
@@ -164,7 +163,15 @@ namespace NugetPackage.ViewModel
 
         private bool CanShowNews(object arg)
         {
-            return true;
+            // Controllo se l'utente preme in uno spazio vuoto nella Listbox
+            if (NomePacchetto == null)
+            {
+                RisultatoLog += "Nessun pacchetto selezionato\n";
+                OnPropertyChanged("RisultatoLog");
+                return false;
+            }
+            else
+                return true;
         }
 
         private void OnShowNews(object obj)

@@ -50,7 +50,7 @@
         <ListBox FontSize="15" Name="listNews" ItemsSource="{Binding Path=RisultatoRicercaNews}" SelectedItem="{Binding Path=NomePacchetto}" Grid.Row="3" Grid.Column="1" Margin="70, 40, 0, 5">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseLeftButtonUp">
-                    <i:InvokeCommandAction Command="{Binding Path=ShowCommand}"/>
+                    <i:InvokeCommandAction Command="{Binding Path=ShowNewsCommand}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListBox>
