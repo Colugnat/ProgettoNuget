@@ -53,6 +53,15 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("RisultatoRicerca");
             }
         }
+        public List<string> RisultatoRicercaNews
+        {
+            get { return model.RisultatoRicercaNews; }
+            set
+            {
+                model.RisultatoRicercaNews = value;
+                OnPropertyChanged("RisultatoRicercaNews");
+            }
+        }
         public string RisultatoPacchetto
         {
             get { return model.RisultatoPacchetto; }
@@ -126,7 +135,25 @@ namespace NugetPackage.ViewModel
                 foreach (string newsName in fileNewsContent)
                 {
                     string[] getVersion = newsName.Split(':');
-                    Console.WriteLine(getVersion[2]);
+                    //////////////////////////////////////////Console.WriteLine(getVersion[2]);
+                    string[] nameCurrentId = getVersion[1].Split('\\');
+                    // Id del pacchetto che si deve ricercare
+                    string packageID = nameCurrentId[nameCurrentId.Length - 1].Split('.')[0];
+
+                    // Connessione al databare dei Nuget package
+                    IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+
+                    // Ricevere la lista di tutti i pacchetti trovati dalla ricerca  
+                    IPackage package = repo.Search(packageID, false).First();
+                    
+                    // Crea una lista
+                    RisultatoRicercaNews = new List<string>();
+                    
+                    if (package.Version.ToString() != getVersion[2])
+                    {
+                        RisultatoRicercaNews.Add(package.Id);
+                    }
+                    OnPropertyChanged("RisultatoRicercaNews");
                 }
             }
             else
@@ -142,7 +169,25 @@ namespace NugetPackage.ViewModel
 
         private void OnShowNews(object obj)
         {
-            throw new NotImplementedException();
+            string packageID = NomePacchetto;
+            // Connessione con il database dei Nuget package
+            IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+            // Versione del pacchetto selezionato
+            VersionePacchetto = repo.Search(packageID, false).First().Version.ToString();
+            OnPropertyChanged("VersionePacchetto");
+            // Descrizione del pacchetto selezionato
+            var descizione = repo.FindPackagesById(packageID).First().Description.ToString();
+            // Creazione della stringa dettagliata con le informazione sul pacchetto corrente
+            FrameworkName frameworkName = new FrameworkName("Anything", new Version("3.5"));
+            string dependency = string.Join("\n - ", repo.Search(packageID, false).First().GetCompatiblePackageDependencies(frameworkName).Select(x => x));
+            if (dependency == "")
+                dependency = "No dependency";
+            string text = "Name: " + NomePacchetto + "\nVersion: " + VersionePacchetto + "\nDescription: \n" + descizione + "\nDependency: \n - " + dependency;
+            RisultatoPacchetto = text;
+            OnPropertyChanged("RisultatoPacchetto");
+            // Informazione di ciò che è accaduto all'utente che sta utilizzando il programma
+            RisultatoLog += "Selezionato pacchetto " + NomePacchetto + "\n";
+            OnPropertyChanged("RisultatoLog");
         }
 
         private bool CanSearch(object arg)
