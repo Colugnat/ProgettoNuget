@@ -11,6 +11,11 @@
         <viewmodels:NugetViewModel></viewmodels:NugetViewModel>
     </UserControl.DataContext>
     <Grid>
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Loaded">
+                <i:InvokeCommandAction Command="{Binding Path=SearchNewsCommand}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>

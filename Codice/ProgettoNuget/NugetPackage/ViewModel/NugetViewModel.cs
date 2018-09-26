@@ -82,6 +82,8 @@ namespace NugetPackage.ViewModel
         public IDelegateCommand SaveCommand { get; protected set; }
         public IDelegateCommand ShowCommand { get; protected set; }
         public IDelegateCommand SearchCommand { get; protected set; }
+        public IDelegateCommand ShowNewsCommand { get; protected set; }
+        public IDelegateCommand SearchNewsCommand { get; protected set; }
         #endregion
 
         #region =================== costruttori ================
@@ -106,6 +108,28 @@ namespace NugetPackage.ViewModel
             SaveCommand = new DelegateCommand(OnSave, CanSave);
             ShowCommand = new DelegateCommand(OnShow, CanShow);
             SearchCommand = new DelegateCommand(OnSearch, CanSearch);
+            ShowNewsCommand = new DelegateCommand(OnShowNews, CanShowNews);
+            SearchNewsCommand = new DelegateCommand(OnSearchNews, CanSearchNews);
+        }
+
+        private bool CanSearchNews(object arg)
+        {
+            return true;
+        }
+
+        private void OnSearchNews(object obj)
+        {
+            //Console.WriteLine(File.ReadAllText("logFileNews.txt"));
+        }
+
+        private bool CanShowNews(object arg)
+        {
+            return true;
+        }
+
+        private void OnShowNews(object obj)
+        {
+            throw new NotImplementedException();
         }
 
         private bool CanSearch(object arg)
@@ -178,16 +202,23 @@ namespace NugetPackage.ViewModel
             string defaultPath = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
             defaultPath = Path.Combine(defaultPath, "Downloads");
             // Controllo se il percorso è vuoto
-            if (Percorso == null)
+            if (File.Exists("logFilePath.txt"))
             {
-                if (File.ReadAllText("logFilePath.txt") == "")
+                if (Percorso == null)
                 {
-                    
-                    Percorso = defaultPath;
-                    File.WriteAllText("logFilePath.txt", Percorso);
+                    if (File.ReadAllText("logFilePath.txt") == "")
+                    {
+                        Percorso = defaultPath;
+                        File.WriteAllText("logFilePath.txt", Percorso);
+                    }
+                    else
+                        Percorso = File.ReadAllText("logFilePath.txt");
                 }
-                else
-                    Percorso = File.ReadAllText("logFilePath.txt");
+            }
+            else
+            {
+                File.Create("logFilePath.txt");
+                Percorso = defaultPath;
             }
             return true;
             //System.ArgumentException
@@ -211,6 +242,27 @@ namespace NugetPackage.ViewModel
                 PackageManager packageManager = new PackageManager(repo, Percorso);
                 // Scaricamento del pacchetto zip è poi estrarlo nel percorso scelto
                 packageManager.InstallPackage(NomePacchetto, SemanticVersion.Parse(VersionePacchetto));
+                string pathVersion = Percorso + "\\" + NomePacchetto + "." + VersionePacchetto + " : " + VersionePacchetto;
+                string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
+                bool change = true;
+                if(fileNewsContent.Length == 0)
+                {
+                    File.AppendAllText("logFileNews.txt", pathVersion + Environment.NewLine);
+                }
+                else
+                {
+                    foreach (string newsName in fileNewsContent)
+                    {
+                        if (newsName == pathVersion)
+                            change = false;
+                    }
+                    if (change)
+                        File.AppendAllText("logFileNews.txt", pathVersion + Environment.NewLine);
+                    else
+                        change = true;
+                }
+                
+                File.WriteAllText("logFilePath.txt", Percorso);
                 // Informazione per vedere quando il pacchetto ha finito di scaricare
                 RisultatoLog += "Pacchetto " + NomePacchetto + " salvato con le rispettive dipendenze nel percorso " + Percorso + "\n";
                 OnPropertyChanged("RisultatoLog");
