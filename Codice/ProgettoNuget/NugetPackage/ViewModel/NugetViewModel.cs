@@ -37,6 +37,15 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("NomePacchetto");
             }
         }
+        public string NomeNewsPacchetto
+        {
+            get { return model.NomeNewsPacchetto; }
+            set
+            {
+                model.NomeNewsPacchetto = value;
+                OnPropertyChanged("NomeNewsPacchetto");
+            }
+        }
         public string VersionePacchetto
         {
             get { return model.VersionePacchetto; }
@@ -176,7 +185,7 @@ namespace NugetPackage.ViewModel
 
         private void OnShowNews(object obj)
         {
-            string packageID = NomePacchetto;
+            string packageID = NomeNewsPacchetto;
             // Connessione con il database dei Nuget package
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
             // Versione del pacchetto selezionato
@@ -189,11 +198,11 @@ namespace NugetPackage.ViewModel
             string dependency = string.Join("\n - ", repo.Search(packageID, false).First().GetCompatiblePackageDependencies(frameworkName).Select(x => x));
             if (dependency == "")
                 dependency = "No dependency";
-            string text = "Name: " + NomePacchetto + "\nVersion: " + VersionePacchetto + "\nDescription: \n" + descizione + "\nDependency: \n - " + dependency;
+            string text = "Name: " + NomeNewsPacchetto + "\nVersion: " + VersionePacchetto + "\nDescription: \n" + descizione + "\nDependency: \n - " + dependency;
             RisultatoPacchetto = text;
             OnPropertyChanged("RisultatoPacchetto");
             // Informazione di ciò che è accaduto all'utente che sta utilizzando il programma
-            RisultatoLog += "Selezionato pacchetto " + NomePacchetto + "\n";
+            RisultatoLog += "Selezionato pacchetto " + NomeNewsPacchetto + "\n";
             OnPropertyChanged("RisultatoLog");
         }
 

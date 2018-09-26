@@ -15,6 +15,7 @@ namespace NugetPackage.Model
         public event PropertyChangedEventHandler PropertyChanged;
         public string Percorso { get; set; }
         public string NomePacchetto { get; set; }
+        public string NomeNewsPacchetto { get; set; }
         public string VersionePacchetto { get; set; }
         public List<string> RisultatoRicerca { get; set; }
         public List<string> RisultatoRicercaNews { get; set; }
