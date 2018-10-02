@@ -26,10 +26,10 @@
             <RowDefinition Height="6*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <TextBox Height="20" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Width="620" Name="path" Text="{Binding Path=Directory}" Grid.ColumnSpan="2" Background="#FF4B4A4A" Foreground="White" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
-        <Button FontSize="12" Content="Browse..." Name="browse" HorizontalAlignment="Right" VerticalAlignment="Center" Width="100" Command="{Binding Path=BrowseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Column="1" Height="20" Background="#FFA6A6A6" BorderBrush="{x:Null}" Foreground="Black"/>
+        <TextBox Height="22" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Width="620" Name="path" Text="{Binding Path=Directory}" Grid.ColumnSpan="2" Background="#FF4B4A4A" Foreground="White" SelectionBrush="#FFA4A4A4" BorderBrush="{x:Null}"/>
+        <Button FontSize="12" Content="Browse..." Name="browse" HorizontalAlignment="Right" VerticalAlignment="Center" Width="100" Command="{Binding Path=BrowseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Column="1" Height="20" Background="#FFA6A6A6" BorderBrush="{x:Null}" Foreground="Black" Margin="0,19,0,20"/>
         <TextBlock Text="Search: " FontSize="18" Name="search" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="24" Grid.Row="1" Margin="70,0,0,0"/>
-        <TextBox FontSize="15" HorizontalAlignment="Center" Text="{Binding Path=StartSearch, UpdateSourceTrigger=PropertyChanged}" Height="22" VerticalAlignment="Center" Width="430" Name="input" Grid.Row="1" Grid.ColumnSpan="2" Background="#FF4B4A4A" Foreground="White" SelectionBrush="{x:Null}" BorderBrush="{x:Null}">
+        <TextBox FontSize="15" HorizontalAlignment="Center" Text="{Binding Path=StartSearch, UpdateSourceTrigger=PropertyChanged}" Height="22" VerticalAlignment="Center" Width="430" Name="input" Grid.Row="1" Grid.ColumnSpan="2" Background="#FF4B4A4A" Foreground="White"  SelectionBrush="#FFA4A4A4" BorderBrush="{x:Null}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="KeyUp">
                     <i:InvokeCommandAction Command="{Binding Path=SearchCommand}"/>
@@ -43,9 +43,9 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListBox>
-        <TextBox FontSize="15" Name="version" IsReadOnly="True" Margin="10,0,0,20" Text="{Binding Path=ResultPackage, Mode=OneWay}" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="#FF6A6A6A" Foreground="White" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" IsEnabled="False"/>
+        <TextBox FontSize="15" Name="version" IsReadOnly="True" Margin="10,0,0,20" Text="{Binding Path=ResultPackage, Mode=OneWay}" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="#FF6A6A6A" Foreground="White"  SelectionBrush="#FFA4A4A4" BorderBrush="{x:Null}" IsEnabled="False"/>
         <Button Content="Save" FontSize="12" Name="save" Margin="10,0,0,0" VerticalAlignment="Bottom" Command="{Binding Path=SaveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Row="2" Grid.Column="1" Height="20" Background="#FFA6A6A6" BorderBrush="{x:Null}" Foreground="Black"/>
-        <TextBox FontSize="15" Name="logArea" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,5,300,5" IsReadOnly="True" Text="{Binding Path=ResultLog, Mode=OneWay}" TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" TextChanged="logArea_TextChanged" Background="#FF4B4A4A" Foreground="#FFD6D6D6" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" IsEnabled="False"/>
+        <TextBox FontSize="15" Name="logArea" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,5,300,5" IsReadOnly="True" Text="{Binding Path=ResultLog, Mode=OneWay}" TextWrapping="Wrap" VerticalScrollBarVisibility="Hidden" TextChanged="logArea_TextChanged" Background="#FF4B4A4A" Foreground="#FFD6D6D6" SelectionBrush="#FFA4A4A4" BorderBrush="{x:Null}" IsEnabled="False"/>
         <TextBlock Text="News: " FontSize="18" Name="news" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Height="24" Grid.Row="3" Grid.Column="1" Margin="70, 10, 0, 0"/>
         <ListBox FontSize="15" Name="listNews" ItemsSource="{Binding Path=ResultSearchNews}" SelectedItem="{Binding Path=NamePackage}" Grid.Row="3" Grid.Column="1" Margin="70, 40, 0, 5" Background="#FF4B4A4A" Foreground="White" BorderBrush="{x:Null}">
             <i:Interaction.Triggers>
