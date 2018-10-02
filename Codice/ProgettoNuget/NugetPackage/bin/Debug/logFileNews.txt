@@ -1,3 +1,0 @@
-C:\Users\Ringo\Desktop\jQuery.Validation:1.17.0
-C:\Users\Ringo\Desktop\jQuery:3.3.0
-C:\Users\Ringo\Desktop\jQuery:3.3.1

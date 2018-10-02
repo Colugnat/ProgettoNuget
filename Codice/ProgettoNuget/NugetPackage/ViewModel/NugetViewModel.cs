@@ -152,7 +152,7 @@ namespace NugetPackage.ViewModel
                 // Id del pacchetto che si deve ricercare
                 string packageID = nameCurrentId[nameCurrentId.Length - 1];
 
-                // Connessione al databare dei Nuget package
+                // Connessione al database dei Nuget package
                 IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
 
                 // Ricevere la lista di tutti i pacchetti trovati dalla ricerca  
@@ -289,13 +289,19 @@ namespace NugetPackage.ViewModel
                     int d = 0;
                     foreach (string newsName in fileNewsContent)
                     {
-                        if (newsName == pathVersion)
+                        string[] getVersion = newsName.Split(':');
+                        string pacchetto = getVersion[1].Split('\\')[getVersion[1].Split('\\').Length - 1];
+                        if (pacchetto == NomePacchetto)
                         {
-                            change = false;
                             d = i;
+                            change = false;
+                            break;
                         }
                         else
+                        {
                             i++;
+                            change = true;
+                        }
                     }
                     if (change)
                     {
@@ -307,7 +313,7 @@ namespace NugetPackage.ViewModel
                         linesList.RemoveAt(d);
                         File.WriteAllLines("logFileNews.txt", linesList.ToArray());
                         File.AppendAllText("logFileNews.txt", pathVersion + Environment.NewLine);
-
+                        OnSearchNews(obj);
                         change = true;
                     }
                 }
