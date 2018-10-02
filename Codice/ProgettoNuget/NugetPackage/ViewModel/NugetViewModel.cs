@@ -131,9 +131,10 @@ namespace NugetPackage.ViewModel
 
         private bool CanSearchNews(object arg)
         {
-            // Controllo se il percorso è vuoto
+            // Check if the file logFileNews.txt is created
             if (!File.Exists("logFileNews.txt"))
             {
+                // Create file
                 File.Create("logFileNews.txt");
             }
             return true;
@@ -143,23 +144,25 @@ namespace NugetPackage.ViewModel
         {
             string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
 
-            // Crea una lista
+            // Create a list for put the name package inside
             ResultSearchNews = new ObservableCollection<string>();
             foreach (string newsName in fileNewsContent)
             {
                 string[] getVersion = newsName.Split(':');
                 string[] nameCurrentId = getVersion[1].Split('\\');
-                // Id del pacchetto che si deve ricercare
+                // Id of the package inside the file logFileNews.txt
                 string packageID = nameCurrentId[nameCurrentId.Length - 1];
 
-                // Connessione al database dei Nuget package
+                // Connection with the Nuget database
                 IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
 
-                // Ricevere la lista di tutti i pacchetti trovati dalla ricerca  
+                // Search all the file with the specified ID
                 IPackage package = repo.Search(packageID, false).First();
 
+                // Check if the package already installed have the last version
                 if (package.Version.ToString() != getVersion[2])
                 {
+                    // Add to the list
                     ResultSearchNews.Add(package.Id);
                 }
             }
@@ -174,19 +177,19 @@ namespace NugetPackage.ViewModel
 
         private void OnSearch(object obj)
         {
-            // Id del pacchetto che si deve ricercare
+            // Id of the package
             string packageID = StartSearch;
 
-            // Connessione al databare dei Nuget package
+            // Connection with the database
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
 
-            // Ricevere la lista di tutti i pacchetti trovati dalla ricerca  
+            // Receive the list of all package searched 
             List<IPackage> packages = repo.Search(packageID, false).Take(14).ToList();
 
-            // Crea una lista
+            // Create a list
             ResultSearch = new ObservableCollection<string>();
 
-            // Riempimento degli array e della lista
+            // Add the package to the list
             foreach (IPackage p in packages)
             {
                 ResultSearch.Add(p.Id);
@@ -195,7 +198,7 @@ namespace NugetPackage.ViewModel
         }
         private bool CanShow(object arg)
         {
-            // Controllo se l'utente preme in uno spazio vuoto nella Listbox
+            // Check if one package is selected
             if (NamePackage == null)
             {
                 ResultLog += "No package selected\n";
@@ -210,36 +213,39 @@ namespace NugetPackage.ViewModel
         private void OnShow(object obj)
         {
             string packageID = NamePackage;
-            // Connessione con il database dei Nuget package
+            // Connection with the Nuget database
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-            // Versione del pacchetto selezionato
+            // Version of the selected package
             VersionPackage = repo.Search(packageID, false).First().Version.ToString();
             OnPropertyChanged("VersionPackage");
-            // Descrizione del pacchetto selezionato
+            // Description of the selected package
             var description = repo.FindPackagesById(packageID).First().Description.ToString();
-            // Creazione della stringa dettagliata con le informazione sul pacchetto corrente
+            // Check the dependency of the Nuget package
             FrameworkName frameworkName = new FrameworkName("Anything", new Version("3.5"));
             string dependency = string.Join("\n - ", repo.Search(packageID, false).First().GetCompatiblePackageDependencies(frameworkName).Select(x => x));
             if (dependency == "")
                 dependency = "No dependency";
+            // Put all the information inside a string
             string text = "Name: " + NamePackage + "\nVersion: " + VersionPackage + "\nDescription: \n" + description + "\nDependency: \n - " + dependency;
             ResultPackage = text;
             OnPropertyChanged("ResultPackage");
-            // Informazione di ciò che è accaduto all'utente che sta utilizzando il programma
+            // Information about what happend in the programm
             ResultLog += "Selected package " + NamePackage + "\n";
             OnPropertyChanged("ResultLog");
         }
 
         private bool CanSave(object arg)
         {
-            // Creazione di un percorso di default in caso non ci sia un percorso scelto
+            // Creation of a default path
             string defaultPath = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
             defaultPath = Path.Combine(defaultPath, "Downloads");
-            // Controllo se il percorso è vuoto
+            // Check if LogFilePath already exist
             if (File.Exists("logFilePath.txt"))
             {
+                // Check if the Directory field is empty
                 if (Directory == null)
                 {
+                    // If logFilePath.txt is empty, use the default path
                     if (File.ReadAllText("logFilePath.txt") == "")
                     {
                         Directory = defaultPath;
@@ -251,6 +257,7 @@ namespace NugetPackage.ViewModel
             }
             else
             {
+                // Create the logFilePath.txt
                 File.Create("logFilePath.txt");
                 Directory = defaultPath;
             }
@@ -261,35 +268,39 @@ namespace NugetPackage.ViewModel
         {
             if (NamePackage != null)
             {
-                // Verificare che il percorso esista è se non esiste si crea il percorso
+                // Verify the path exist
                 if (!File.Exists(Directory))
                 {
-                    // Creazione del percorso di default
+                    // Creation of the default path
                     string defaultPath = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
                     defaultPath = Path.Combine(defaultPath, "Downloads");
-                    // Controllo se il percorso è vuoto oppure null
+                    // Control if the variable Directory is empty or null
                     if (Directory == "" || Directory == null)
                     {
                         Directory = defaultPath;
                         ResultLog += "No path setted, the package will be saved in the default path (" + Directory + ")\n";
                         OnPropertyChanged("ResultLog");
                     }
-                    // Creazione al collegamento con Nuget package
+                    // Connection with the Nuget database
                     IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
                     PackageManager packageManager = new PackageManager(repo, Directory);
-                    // Scaricamento del pacchetto zip è poi estrarlo nel percorso scelto
+                    // Downloading and unzipping the Nuget package selected
                     packageManager.InstallPackage(NamePackage, SemanticVersion.Parse(VersionPackage));
+                    // Create a information about where and what version of the package is installed
                     string pathVersion = Directory + "\\" + NamePackage + ":" + VersionPackage;
+                    // Read all lines inside the logFileNews.txt
                     string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
                     bool change = true;
                     if (fileNewsContent.Length == 0)
                     {
+                        // If file is empty put the first information
                         File.AppendAllText("logFileNews.txt", pathVersion + Environment.NewLine);
                     }
                     else
                     {
                         int i = 0;
                         int d = 0;
+                        // Check if the file already exist inside the file
                         foreach (string newsName in fileNewsContent)
                         {
                             string[] getVersion = newsName.Split(':');
@@ -308,10 +319,12 @@ namespace NugetPackage.ViewModel
                         }
                         if (change)
                         {
+                            // If it's a new package, write inside the file
                             File.AppendAllText("logFileNews.txt", pathVersion + Environment.NewLine);
                         }
                         else
                         {
+                            // If already exist the package, modify the path and the package inside the file
                             List<string> linesList = File.ReadAllLines("logFileNews.txt").ToList();
                             linesList.RemoveAt(d);
                             File.WriteAllLines("logFileNews.txt", linesList.ToArray());
@@ -320,8 +333,9 @@ namespace NugetPackage.ViewModel
                             change = true;
                         }
                     }
+                    // Write inside the logFilePath.txt the new directory
                     File.WriteAllText("logFilePath.txt", Directory);
-                    // Informazione per vedere quando il pacchetto ha finito di scaricare
+                    // Information when the package is downloaded in the computer
                     ResultLog += "Package " + NamePackage + " saved with dependency in the path " + Directory + "\n";
                     OnPropertyChanged("ResultLog");
                 }
@@ -341,7 +355,7 @@ namespace NugetPackage.ViewModel
 
         private void OnBrowse(object obj)
         {
-            // Codice che permette di aprire una finestra per scegliere il percorso per salvare il pacchetto Nuget
+            // Code that allows you to open a window to choose the path to save the Nuget package
             FolderBrowserDialog folderDialog = new FolderBrowserDialog {
                 SelectedPath = "C:\\"
             };
