@@ -131,42 +131,39 @@ namespace NugetPackage.ViewModel
 
         private bool CanSearchNews(object arg)
         {
+            // Controllo se il percorso è vuoto
+            if (!File.Exists("logFileNews.txt"))
+            {
+                File.Create("logFileNews.txt");
+            }
             return true;
         }
 
         private void OnSearchNews(object obj)
         {
-            //Console.WriteLine(File.ReadAllText("logFileNews.txt"));
-            if(File.Exists("logFileNews.txt"))
-            {
-                string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
+            string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
 
-                // Crea una lista
-                RisultatoRicercaNews = new ObservableCollection<string>();
-                foreach (string newsName in fileNewsContent)
+            // Crea una lista
+            RisultatoRicercaNews = new ObservableCollection<string>();
+            foreach (string newsName in fileNewsContent)
+            {
+                string[] getVersion = newsName.Split(':');
+                string[] nameCurrentId = getVersion[1].Split('\\');
+                // Id del pacchetto che si deve ricercare
+                string packageID = nameCurrentId[nameCurrentId.Length - 1];
+
+                // Connessione al databare dei Nuget package
+                IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+
+                // Ricevere la lista di tutti i pacchetti trovati dalla ricerca  
+                IPackage package = repo.Search(packageID, false).First();
+
+                if (package.Version.ToString() != getVersion[2])
                 {
-                    string[] getVersion = newsName.Split(':');
-                    string[] nameCurrentId = getVersion[1].Split('\\');
-                    // Id del pacchetto che si deve ricercare
-                    string packageID = nameCurrentId[nameCurrentId.Length - 1];
-
-                    // Connessione al databare dei Nuget package
-                    IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-
-                    // Ricevere la lista di tutti i pacchetti trovati dalla ricerca  
-                    IPackage package = repo.Search(packageID, false).First();
-                    
-                    if (package.Version.ToString() != getVersion[2])
-                    {
-                        RisultatoRicercaNews.Add(package.Id);
-                    }
+                    RisultatoRicercaNews.Add(package.Id);
                 }
-                OnPropertyChanged("RisultatoRicercaNews");
             }
-            else
-            {
-                File.Create("logFileNews.txt");
-            }
+            OnPropertyChanged("RisultatoRicercaNews");
         }
 
         private bool CanSearch(object arg)
@@ -288,15 +285,31 @@ namespace NugetPackage.ViewModel
                 }
                 else
                 {
+                    int i = 0;
+                    int d = 0;
                     foreach (string newsName in fileNewsContent)
                     {
                         if (newsName == pathVersion)
+                        {
                             change = false;
+                            d = i;
+                        }
+                        else
+                            i++;
                     }
                     if (change)
+                    {
                         File.AppendAllText("logFileNews.txt", pathVersion + Environment.NewLine);
+                    }
                     else
+                    {
+                        List<string> linesList = File.ReadAllLines("logFileNews.txt").ToList();
+                        linesList.RemoveAt(d);
+                        File.WriteAllLines("logFileNews.txt", linesList.ToArray());
+                        File.AppendAllText("logFileNews.txt", pathVersion + Environment.NewLine);
+
                         change = true;
+                    }
                 }
                 File.WriteAllText("logFilePath.txt", Percorso);
                 // Informazione per vedere quando il pacchetto ha finito di scaricare
