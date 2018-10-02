@@ -259,67 +259,76 @@ namespace NugetPackage.ViewModel
         }
         private void OnSave(object obj)
         {
-            // Verificare che il percorso esista è se non esiste si crea il percorso
-            if (!File.Exists(Percorso)) {
-                // Creazione del percorso di default
-                string defaultPath = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
-                defaultPath = Path.Combine(defaultPath, "Downloads");
-                // Controllo se il percorso è vuoto oppure null
-                if (Percorso == "" || Percorso == null)
+            if (NomePacchetto != null)
+            {
+                // Verificare che il percorso esista è se non esiste si crea il percorso
+                if (!File.Exists(Percorso))
                 {
-                    Percorso = defaultPath;
-                    RisultatoLog += "Nessun percorso scelto, il pacchetto si salverà nel percorso di default (" + Percorso + ")\n";
-                    OnPropertyChanged("RisultatoLog");
-                }
-                // Creazione al collegamento con Nuget package
-                IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-                PackageManager packageManager = new PackageManager(repo, Percorso);
-                // Scaricamento del pacchetto zip è poi estrarlo nel percorso scelto
-                packageManager.InstallPackage(NomePacchetto, SemanticVersion.Parse(VersionePacchetto));
-                string pathVersion = Percorso + "\\" + NomePacchetto + ":" + VersionePacchetto;
-                string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
-                bool change = true;
-                if(fileNewsContent.Length == 0)
-                {
-                    File.AppendAllText("logFileNews.txt", pathVersion + Environment.NewLine);
-                }
-                else
-                {
-                    int i = 0;
-                    int d = 0;
-                    foreach (string newsName in fileNewsContent)
+                    // Creazione del percorso di default
+                    string defaultPath = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
+                    defaultPath = Path.Combine(defaultPath, "Downloads");
+                    // Controllo se il percorso è vuoto oppure null
+                    if (Percorso == "" || Percorso == null)
                     {
-                        string[] getVersion = newsName.Split(':');
-                        string pacchetto = getVersion[1].Split('\\')[getVersion[1].Split('\\').Length - 1];
-                        if (pacchetto == NomePacchetto)
-                        {
-                            d = i;
-                            change = false;
-                            break;
-                        }
-                        else
-                        {
-                            i++;
-                            change = true;
-                        }
+                        Percorso = defaultPath;
+                        RisultatoLog += "Nessun percorso scelto, il pacchetto si salverà nel percorso di default (" + Percorso + ")\n";
+                        OnPropertyChanged("RisultatoLog");
                     }
-                    if (change)
+                    // Creazione al collegamento con Nuget package
+                    IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+                    PackageManager packageManager = new PackageManager(repo, Percorso);
+                    // Scaricamento del pacchetto zip è poi estrarlo nel percorso scelto
+                    packageManager.InstallPackage(NomePacchetto, SemanticVersion.Parse(VersionePacchetto));
+                    string pathVersion = Percorso + "\\" + NomePacchetto + ":" + VersionePacchetto;
+                    string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
+                    bool change = true;
+                    if (fileNewsContent.Length == 0)
                     {
                         File.AppendAllText("logFileNews.txt", pathVersion + Environment.NewLine);
                     }
                     else
                     {
-                        List<string> linesList = File.ReadAllLines("logFileNews.txt").ToList();
-                        linesList.RemoveAt(d);
-                        File.WriteAllLines("logFileNews.txt", linesList.ToArray());
-                        File.AppendAllText("logFileNews.txt", pathVersion + Environment.NewLine);
-                        OnSearchNews(obj);
-                        change = true;
+                        int i = 0;
+                        int d = 0;
+                        foreach (string newsName in fileNewsContent)
+                        {
+                            string[] getVersion = newsName.Split(':');
+                            string pacchetto = getVersion[1].Split('\\')[getVersion[1].Split('\\').Length - 1];
+                            if (pacchetto == NomePacchetto)
+                            {
+                                d = i;
+                                change = false;
+                                break;
+                            }
+                            else
+                            {
+                                i++;
+                                change = true;
+                            }
+                        }
+                        if (change)
+                        {
+                            File.AppendAllText("logFileNews.txt", pathVersion + Environment.NewLine);
+                        }
+                        else
+                        {
+                            List<string> linesList = File.ReadAllLines("logFileNews.txt").ToList();
+                            linesList.RemoveAt(d);
+                            File.WriteAllLines("logFileNews.txt", linesList.ToArray());
+                            File.AppendAllText("logFileNews.txt", pathVersion + Environment.NewLine);
+                            OnSearchNews(obj);
+                            change = true;
+                        }
                     }
+                    File.WriteAllText("logFilePath.txt", Percorso);
+                    // Informazione per vedere quando il pacchetto ha finito di scaricare
+                    RisultatoLog += "Pacchetto " + NomePacchetto + " salvato con le rispettive dipendenze nel percorso " + Percorso + "\n";
+                    OnPropertyChanged("RisultatoLog");
                 }
-                File.WriteAllText("logFilePath.txt", Percorso);
-                // Informazione per vedere quando il pacchetto ha finito di scaricare
-                RisultatoLog += "Pacchetto " + NomePacchetto + " salvato con le rispettive dipendenze nel percorso " + Percorso + "\n";
+            }
+            else
+            {
+                RisultatoLog += "Nessun pacchetto è stato selezionato\n";
                 OnPropertyChanged("RisultatoLog");
             }
         }
