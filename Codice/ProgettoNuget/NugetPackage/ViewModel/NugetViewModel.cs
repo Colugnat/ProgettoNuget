@@ -22,79 +22,79 @@ namespace NugetPackage.ViewModel
         #region =================== membri & proprietà ===========
         public event PropertyChangedEventHandler PropertyChanged;
         private Nuget model;
-        public string Percorso
+        public string Directory
         {
-            get { return model.Percorso; }
+            get { return model.Directory; }
             set {
-                model.Percorso = value;
-                OnPropertyChanged("Percorso");
+                model.Directory = value;
+                OnPropertyChanged("Directory");
             }
         }
-        public string NomePacchetto
+        public string NamePackage
         {
-            get { return model.NomePacchetto; }
+            get { return model.NamePackage; }
             set {
-                model.NomePacchetto = value;
-                OnPropertyChanged("NomePacchetto");
+                model.NamePackage = value;
+                OnPropertyChanged("NamePackage");
             }
         }
-        public string NomeNewsPacchetto
+        public string NameNewsPackage
         {
-            get { return model.NomeNewsPacchetto; }
+            get { return model.NameNewsPackage; }
             set
             {
-                model.NomeNewsPacchetto = value;
-                OnPropertyChanged("NomeNewsPacchetto");
+                model.NameNewsPackage = value;
+                OnPropertyChanged("NameNewsPackage");
             }
         }
-        public string VersionePacchetto
+        public string VersionPackage
         {
-            get { return model.VersionePacchetto; }
+            get { return model.VersionPackage; }
             set {
-                model.VersionePacchetto = value;
-                OnPropertyChanged("VersionePacchetto");
+                model.VersionPackage = value;
+                OnPropertyChanged("VersionPackage");
             }
         }
-        public ObservableCollection<string> RisultatoRicerca
+        public ObservableCollection<string> ResultSearch
         {
-            get { return model.RisultatoRicerca; }
+            get { return model.ResultSearch; }
             set {
-                model.RisultatoRicerca = value;
-                OnPropertyChanged("RisultatoRicerca");
+                model.ResultSearch = value;
+                OnPropertyChanged("ResultSearch");
             }
         }
-        public ObservableCollection<string> RisultatoRicercaNews
+        public ObservableCollection<string> ResultSearchNews
         {
-            get { return model.RisultatoRicercaNews; }
+            get { return model.ResultSearchNews; }
             set
             {
-                model.RisultatoRicercaNews = value;
-                OnPropertyChanged("RisultatoRicercaNews");
+                model.ResultSearchNews = value;
+                OnPropertyChanged("ResultSearchNews");
             }
         }
-        public string RisultatoPacchetto
+        public string ResultPackage
         {
-            get { return model.RisultatoPacchetto; }
+            get { return model.ResultPackage; }
             set {
-                model.RisultatoPacchetto = value;
-                OnPropertyChanged("RisultatoPacchetto");
+                model.ResultPackage = value;
+                OnPropertyChanged("ResultPackage");
             }
         }
-        public string InizioRicerca
+        public string StartSearch
         {
-            get { return model.InizioRicerca; }
+            get { return model.StartSearch; }
             set {
-                model.InizioRicerca = value;
-                OnPropertyChanged("InizioRicerca");
+                model.StartSearch = value;
+                OnPropertyChanged("StartSearch");
             }
         }
-        public string RisultatoLog
+        public string ResultLog
         {
-            get { return model.RisultatoLog; }
+            get { return model.ResultLog; }
             set
             {
-                model.RisultatoLog = value;
-                OnPropertyChanged("RisultatoLog");
+                model.ResultLog = value;
+                OnPropertyChanged("ResultLog");
             }
         }
         public IDelegateCommand BrowseCommand { get; protected set; }
@@ -144,7 +144,7 @@ namespace NugetPackage.ViewModel
             string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
 
             // Crea una lista
-            RisultatoRicercaNews = new ObservableCollection<string>();
+            ResultSearchNews = new ObservableCollection<string>();
             foreach (string newsName in fileNewsContent)
             {
                 string[] getVersion = newsName.Split(':');
@@ -160,10 +160,10 @@ namespace NugetPackage.ViewModel
 
                 if (package.Version.ToString() != getVersion[2])
                 {
-                    RisultatoRicercaNews.Add(package.Id);
+                    ResultSearchNews.Add(package.Id);
                 }
             }
-            OnPropertyChanged("RisultatoRicercaNews");
+            OnPropertyChanged("ResultSearchNews");
         }
 
         private bool CanSearch(object arg)
@@ -175,7 +175,7 @@ namespace NugetPackage.ViewModel
         private void OnSearch(object obj)
         {
             // Id del pacchetto che si deve ricercare
-            string packageID = InizioRicerca;
+            string packageID = StartSearch;
 
             // Connessione al databare dei Nuget package
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
@@ -184,22 +184,22 @@ namespace NugetPackage.ViewModel
             List<IPackage> packages = repo.Search(packageID, false).Take(14).ToList();
 
             // Crea una lista
-            RisultatoRicerca = new ObservableCollection<string>();
+            ResultSearch = new ObservableCollection<string>();
 
             // Riempimento degli array e della lista
             foreach (IPackage p in packages)
             {
-                RisultatoRicerca.Add(p.Id);
+                ResultSearch.Add(p.Id);
             }
-            OnPropertyChanged("RisultatoRicerca");
+            OnPropertyChanged("ResultSearch");
         }
         private bool CanShow(object arg)
         {
             // Controllo se l'utente preme in uno spazio vuoto nella Listbox
-            if (NomePacchetto == null)
+            if (NamePackage == null)
             {
-                RisultatoLog += "Nessun pacchetto selezionato\n";
-                OnPropertyChanged("RisultatoLog");
+                ResultLog += "No package selected\n";
+                OnPropertyChanged("ResultLog");
                 return false;
             }
             else
@@ -209,25 +209,25 @@ namespace NugetPackage.ViewModel
 
         private void OnShow(object obj)
         {
-            string packageID = NomePacchetto;
+            string packageID = NamePackage;
             // Connessione con il database dei Nuget package
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
             // Versione del pacchetto selezionato
-            VersionePacchetto = repo.Search(packageID, false).First().Version.ToString();
-            OnPropertyChanged("VersionePacchetto");
+            VersionPackage = repo.Search(packageID, false).First().Version.ToString();
+            OnPropertyChanged("VersionPackage");
             // Descrizione del pacchetto selezionato
-            var descizione = repo.FindPackagesById(packageID).First().Description.ToString();
+            var description = repo.FindPackagesById(packageID).First().Description.ToString();
             // Creazione della stringa dettagliata con le informazione sul pacchetto corrente
             FrameworkName frameworkName = new FrameworkName("Anything", new Version("3.5"));
             string dependency = string.Join("\n - ", repo.Search(packageID, false).First().GetCompatiblePackageDependencies(frameworkName).Select(x => x));
             if (dependency == "")
                 dependency = "No dependency";
-            string text = "Name: " + NomePacchetto + "\nVersion: " + VersionePacchetto + "\nDescription: \n" + descizione + "\nDependency: \n - " + dependency;
-            RisultatoPacchetto = text;
-            OnPropertyChanged("RisultatoPacchetto");
+            string text = "Name: " + NamePackage + "\nVersion: " + VersionPackage + "\nDescription: \n" + description + "\nDependency: \n - " + dependency;
+            ResultPackage = text;
+            OnPropertyChanged("ResultPackage");
             // Informazione di ciò che è accaduto all'utente che sta utilizzando il programma
-            RisultatoLog += "Selezionato pacchetto " + NomePacchetto + "\n";
-            OnPropertyChanged("RisultatoLog");
+            ResultLog += "Selected package " + NamePackage + "\n";
+            OnPropertyChanged("ResultLog");
         }
 
         private bool CanSave(object arg)
@@ -238,48 +238,48 @@ namespace NugetPackage.ViewModel
             // Controllo se il percorso è vuoto
             if (File.Exists("logFilePath.txt"))
             {
-                if (Percorso == null)
+                if (Directory == null)
                 {
                     if (File.ReadAllText("logFilePath.txt") == "")
                     {
-                        Percorso = defaultPath;
-                        File.WriteAllText("logFilePath.txt", Percorso);
+                        Directory = defaultPath;
+                        File.WriteAllText("logFilePath.txt", Directory);
                     }
                     else
-                        Percorso = File.ReadAllText("logFilePath.txt");
+                        Directory = File.ReadAllText("logFilePath.txt");
                 }
             }
             else
             {
                 File.Create("logFilePath.txt");
-                Percorso = defaultPath;
+                Directory = defaultPath;
             }
             return true;
             //System.ArgumentException
         }
         private void OnSave(object obj)
         {
-            if (NomePacchetto != null)
+            if (NamePackage != null)
             {
                 // Verificare che il percorso esista è se non esiste si crea il percorso
-                if (!File.Exists(Percorso))
+                if (!File.Exists(Directory))
                 {
                     // Creazione del percorso di default
                     string defaultPath = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
                     defaultPath = Path.Combine(defaultPath, "Downloads");
                     // Controllo se il percorso è vuoto oppure null
-                    if (Percorso == "" || Percorso == null)
+                    if (Directory == "" || Directory == null)
                     {
-                        Percorso = defaultPath;
-                        RisultatoLog += "Nessun percorso scelto, il pacchetto si salverà nel percorso di default (" + Percorso + ")\n";
-                        OnPropertyChanged("RisultatoLog");
+                        Directory = defaultPath;
+                        ResultLog += "No path setted, the package will be saved in the default path (" + Directory + ")\n";
+                        OnPropertyChanged("ResultLog");
                     }
                     // Creazione al collegamento con Nuget package
                     IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-                    PackageManager packageManager = new PackageManager(repo, Percorso);
+                    PackageManager packageManager = new PackageManager(repo, Directory);
                     // Scaricamento del pacchetto zip è poi estrarlo nel percorso scelto
-                    packageManager.InstallPackage(NomePacchetto, SemanticVersion.Parse(VersionePacchetto));
-                    string pathVersion = Percorso + "\\" + NomePacchetto + ":" + VersionePacchetto;
+                    packageManager.InstallPackage(NamePackage, SemanticVersion.Parse(VersionPackage));
+                    string pathVersion = Directory + "\\" + NamePackage + ":" + VersionPackage;
                     string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
                     bool change = true;
                     if (fileNewsContent.Length == 0)
@@ -293,8 +293,8 @@ namespace NugetPackage.ViewModel
                         foreach (string newsName in fileNewsContent)
                         {
                             string[] getVersion = newsName.Split(':');
-                            string pacchetto = getVersion[1].Split('\\')[getVersion[1].Split('\\').Length - 1];
-                            if (pacchetto == NomePacchetto)
+                            string package = getVersion[1].Split('\\')[getVersion[1].Split('\\').Length - 1];
+                            if (package == NamePackage)
                             {
                                 d = i;
                                 change = false;
@@ -320,16 +320,16 @@ namespace NugetPackage.ViewModel
                             change = true;
                         }
                     }
-                    File.WriteAllText("logFilePath.txt", Percorso);
+                    File.WriteAllText("logFilePath.txt", Directory);
                     // Informazione per vedere quando il pacchetto ha finito di scaricare
-                    RisultatoLog += "Pacchetto " + NomePacchetto + " salvato con le rispettive dipendenze nel percorso " + Percorso + "\n";
-                    OnPropertyChanged("RisultatoLog");
+                    ResultLog += "Package " + NamePackage + " saved with dependency in the path " + Directory + "\n";
+                    OnPropertyChanged("ResultLog");
                 }
             }
             else
             {
-                RisultatoLog += "Nessun pacchetto è stato selezionato\n";
-                OnPropertyChanged("RisultatoLog");
+                ResultLog += "No package selected\n";
+                OnPropertyChanged("ResultLog");
             }
         }
 
@@ -348,11 +348,11 @@ namespace NugetPackage.ViewModel
 
             DialogResult result = folderDialog.ShowDialog();
             if (result.ToString() == "OK") {
-                Percorso = folderDialog.SelectedPath;
-                OnPropertyChanged("Percorso");
-                File.WriteAllText("logFilePath.txt", Percorso);
-                RisultatoLog += "Selezionato il percorso " + Percorso + "\n";
-                OnPropertyChanged("RisultatoLog");
+                Directory = folderDialog.SelectedPath;
+                OnPropertyChanged("Directory");
+                File.WriteAllText("logFilePath.txt", Directory);
+                ResultLog += "Selected path " + Directory + "\n";
+                OnPropertyChanged("ResultLog");
             }
         }
         #endregion

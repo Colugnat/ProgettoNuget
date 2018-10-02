@@ -13,15 +13,15 @@ namespace NugetPackage.Model
 
         #region =================== membri & proprietà ===========
         public event PropertyChangedEventHandler PropertyChanged;
-        public string Percorso { get; set; }
-        public string NomePacchetto { get; set; }
-        public string NomeNewsPacchetto { get; set; }
-        public string VersionePacchetto { get; set; }
-        public ObservableCollection<string> RisultatoRicerca { get; set; }
-        public ObservableCollection<string> RisultatoRicercaNews { get; set; }
-        public string InizioRicerca { get; set; }
-        public string RisultatoPacchetto { get; set; }
-        public string RisultatoLog { get; set; }
+        public string Directory { get; set; }
+        public string NamePackage { get; set; }
+        public string NameNewsPackage { get; set; }
+        public string VersionPackage { get; set; }
+        public ObservableCollection<string> ResultSearch { get; set; }
+        public ObservableCollection<string> ResultSearchNews { get; set; }
+        public string StartSearch { get; set; }
+        public string ResultPackage { get; set; }
+        public string ResultLog { get; set; }
         #endregion
 
         #region =================== costruttori ================
