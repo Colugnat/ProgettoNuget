@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:NugetPackage"
         xmlns:view="clr-namespace:NugetPackage.View"
         mc:Ignorable="d"
-        Title="Nuget download" Height="690" Width="750" ResizeMode="NoResize">
-    <Grid>
+        Title="Nuget download" Height="690" Width="750" ResizeMode="NoResize" Background="#FF1F1F1F" Foreground="White" >
+    <Grid >
         <view:MainView/>
     </Grid>
 </Window>
