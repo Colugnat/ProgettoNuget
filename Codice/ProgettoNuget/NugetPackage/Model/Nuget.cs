@@ -15,7 +15,6 @@ namespace NugetPackage.Model
         public event PropertyChangedEventHandler PropertyChanged;
         public string Directory { get; set; }
         public string NamePackage { get; set; }
-        public string NameNewsPackage { get; set; }
         public string VersionPackage { get; set; }
         public ObservableCollection<string> ResultSearch { get; set; }
         public ObservableCollection<string> ResultSearchNews { get; set; }

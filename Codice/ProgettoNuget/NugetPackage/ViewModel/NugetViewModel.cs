@@ -38,15 +38,6 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("NamePackage");
             }
         }
-        public string NameNewsPackage
-        {
-            get { return model.NameNewsPackage; }
-            set
-            {
-                model.NameNewsPackage = value;
-                OnPropertyChanged("NameNewsPackage");
-            }
-        }
         public string VersionPackage
         {
             get { return model.VersionPackage; }
