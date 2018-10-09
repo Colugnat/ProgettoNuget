@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace NugetPackage.Model
 {
-    class Nuget : INotifyPropertyChanged
+    class Nuget
     {
         #region =================== costanti ===================
         #endregion
@@ -12,7 +12,6 @@ namespace NugetPackage.Model
         #endregion
 
         #region =================== membri & proprietà ===========
-        public event PropertyChangedEventHandler PropertyChanged;
         public string Directory { get; set; }
         public string NamePackage { get; set; }
         public string VersionPackage { get; set; }
@@ -27,10 +26,7 @@ namespace NugetPackage.Model
         #endregion
 
         #region =================== metodi aiuto ===============
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+
         #endregion
 
         #region =================== metodi generali ============
