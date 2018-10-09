@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.Versioning;
 using System.Windows.Forms;
 
@@ -128,7 +129,20 @@ namespace NugetPackage.ViewModel
                 // Create file
                 File.Create("logFileNews.txt");
             }
-            return true;
+            try
+            {
+                using (var client = new WebClient())
+                using (var stream = client.OpenRead("http://www.google.com"))
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                ResultLog = "No internet connection";
+                OnPropertyChanged("ResultLog");
+                return false;
+            }
         }
 
         private void OnSearchNews(object obj)
@@ -162,8 +176,18 @@ namespace NugetPackage.ViewModel
 
         private bool CanSearch(object arg)
         {
-            return true;
-            //No exception
+            try
+            {
+                using (var client = new WebClient())
+                using (var stream = client.OpenRead("http://www.google.com"))
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private void OnSearch(object obj)
