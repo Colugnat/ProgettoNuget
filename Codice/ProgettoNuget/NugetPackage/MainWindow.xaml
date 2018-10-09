@@ -7,7 +7,7 @@
         xmlns:view="clr-namespace:NugetPackage.View"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="Nuget download" Height="690" Width="750" ResizeMode="NoResize" Background="#FF1F1F1F" Foreground="White" >
+        Title="Nuget download" Height="690" Width="750" ResizeMode="NoResize" Background="#FF1F1F1F" Foreground="White" ShowIconOnTitleBar="True">
     <Grid >
         <view:MainView/>
     </Grid>
