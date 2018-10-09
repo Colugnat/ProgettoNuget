@@ -129,6 +129,7 @@ namespace NugetPackage.ViewModel
                 // Create file
                 File.Create("logFileNews.txt");
             }
+            // Control the internet connection
             try
             {
                 using (var client = new WebClient())
@@ -176,6 +177,7 @@ namespace NugetPackage.ViewModel
 
         private bool CanSearch(object arg)
         {
+            // Control the internet connection
             try
             {
                 using (var client = new WebClient())
