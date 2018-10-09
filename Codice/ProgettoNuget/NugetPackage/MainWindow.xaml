@@ -1,13 +1,14 @@
-﻿<Window x:Class="NugetPackage.MainWindow"
+﻿<Controls:MetroWindow x:Class="NugetPackage.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NugetPackage"
         xmlns:view="clr-namespace:NugetPackage.View"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="Nuget download" Height="690" Width="750" ResizeMode="NoResize" Background="#FF1F1F1F" Foreground="White" >
     <Grid >
         <view:MainView/>
     </Grid>
-</Window>
+</Controls:MetroWindow>
