@@ -1,0 +1,5 @@
+C:\Users\Ringo\Desktop\Microsoft.jQuery.Unobtrusive.Ajax:3.2.6
+C:\Users\Ringo\Desktop\Twitter.Bootstrap:3.0.1.1
+C:\Users\Ringo\Desktop\Microsoft.jQuery.Unobtrusive.Validation:3.2.11
+C:\Users\Ringo\Desktop\jQuery.UI.i18n:1.10.2
+C:\Users\Ringo\Desktop\jQuery:3.3.1
