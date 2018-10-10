@@ -1,13 +1,17 @@
 ﻿using NuGet;
 using NugetPackage.Model;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.Versioning;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace NugetPackage.ViewModel
@@ -89,6 +93,24 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("ResultLog");
             }
         }
+        public string DescriptionPackage
+        {
+            get { return model.DescriptionPackage; }
+            set
+            {
+                model.DescriptionPackage = value;
+                OnPropertyChanged("DescriptionPackage");
+            }
+        }
+        public string DependencyPackage
+        {
+            get { return model.DependencyPackage; }
+            set
+            {
+                model.DependencyPackage = value;
+                OnPropertyChanged("DependencyPackage");
+            }
+        }
         public IDelegateCommand BrowseCommand { get; protected set; }
         public IDelegateCommand SaveCommand { get; protected set; }
         public IDelegateCommand ShowCommand { get; protected set; }
@@ -128,6 +150,7 @@ namespace NugetPackage.ViewModel
             {
                 // Create file
                 File.Create("logFileNews.txt");
+                return false;
             }
             // Control the internet connection
             try
@@ -140,7 +163,7 @@ namespace NugetPackage.ViewModel
             }
             catch
             {
-                ResultLog = "No internet connection";
+                ResultLog = "No internet connection\n";
                 OnPropertyChanged("ResultLog");
                 return false;
             }
@@ -188,6 +211,8 @@ namespace NugetPackage.ViewModel
             }
             catch
             {
+                ResultLog = "No internet connection\n";
+                OnPropertyChanged("ResultLog");
                 return false;
             }
         }
@@ -236,14 +261,17 @@ namespace NugetPackage.ViewModel
             VersionPackage = repo.Search(packageID, false).First().Version.ToString();
             OnPropertyChanged("VersionPackage");
             // Description of the selected package
-            var description = repo.FindPackagesById(packageID).First().Description.ToString();
+            DescriptionPackage = repo.FindPackagesById(packageID).First().Description.ToString();
+            OnPropertyChanged("DescriptionPackage");
             // Check the dependency of the Nuget package
             FrameworkName frameworkName = new FrameworkName("Anything", new Version("3.5"));
-            string dependency = string.Join("\n - ", repo.Search(packageID, false).First().GetCompatiblePackageDependencies(frameworkName).Select(x => x));
-            if (dependency == "")
-                dependency = "No dependency";
+            DependencyPackage = string.Join("\n - ", repo.Search(packageID, false).First().GetCompatiblePackageDependencies(frameworkName).Select(x => x));
+            if (DependencyPackage == "")
+                DependencyPackage = "No dependency";
+            DependencyPackage = " - " + DependencyPackage;
+            OnPropertyChanged("DependencyPackage");
             // Put all the information inside a string
-            string text = "Name: " + NamePackage + "\nVersion: " + VersionPackage + "\nDescription: \n" + description + "\nDependency: \n - " + dependency;
+            string text = "Name: " + NamePackage + "\nVersion: " + VersionPackage + "\nDescription: \n" + DescriptionPackage + "\nDependency: \n" + DependencyPackage;
             ResultPackage = text;
             OnPropertyChanged("ResultPackage");
             // Information about what happend in the programm
@@ -303,6 +331,7 @@ namespace NugetPackage.ViewModel
                     PackageManager packageManager = new PackageManager(repo, Directory);
                     // Downloading and unzipping the Nuget package selected
                     packageManager.InstallPackage(NamePackage, SemanticVersion.Parse(VersionPackage));
+                    createPDF();
                     // Create a information about where and what version of the package is installed
                     string pathVersion = Directory + "\\" + NamePackage + ":" + VersionPackage;
                     // Read all lines inside the logFileNews.txt
@@ -385,6 +414,41 @@ namespace NugetPackage.ViewModel
                 ResultLog += "Selected path " + Directory + "\n";
                 OnPropertyChanged("ResultLog");
             }
+        }
+        private void createPDF()
+        {
+            PdfDocument pdf = new PdfDocument();
+            pdf.Info.Title = NamePackage;
+            PdfPage pdfPage = pdf.AddPage();
+            XGraphics graph = XGraphics.FromPdfPage(pdfPage);
+            XFont font = new XFont("Arial", 14, XFontStyle.Regular);
+            XFont fontTitle = new XFont("Arial", 16, XFontStyle.Bold);
+            string[] linesDescription = DescriptionPackage.Split('\n');
+            graph.DrawString("Title:", fontTitle, XBrushes.Black, new XRect(20, 20, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+            graph.DrawString(NamePackage, font, XBrushes.Black, new XRect(20, 40, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+            graph.DrawString("Version:", fontTitle, XBrushes.Black, new XRect(20, 60, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+            graph.DrawString(VersionPackage, font, XBrushes.Black, new XRect(20, 80, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+            graph.DrawString("Description:", fontTitle, XBrushes.Black, new XRect(20, 100, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+            int newLine = 120;
+            foreach (string lineDescription in linesDescription)
+            {
+                string[] resLineDescription = Regex.Split(Regex.Replace(lineDescription, "(.{" + 80 + "})", "$1" + Environment.NewLine), "\n");
+                foreach (string finalLine in resLineDescription)
+                {
+                    graph.DrawString(finalLine, font, XBrushes.Black, new XRect(20, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+                    newLine += 20;
+                }
+            }
+            graph.DrawString("Dependency:", fontTitle, XBrushes.Black, new XRect(20, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+            newLine += 20;
+            string[] dependencySplitted = DependencyPackage.Split('\n');
+            foreach (string dependencyLine in dependencySplitted)
+            {
+                graph.DrawString(dependencyLine, font, XBrushes.Black, new XRect(20, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+                newLine += 20;
+            }
+            string pdfFilename = NamePackage + "." + VersionPackage + ".pdf";
+            pdf.Save(Directory + "\\" + NamePackage + "." + VersionPackage + "\\" +  pdfFilename);
         }
         #endregion
     }

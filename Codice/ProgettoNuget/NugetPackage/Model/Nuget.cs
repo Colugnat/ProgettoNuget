@@ -20,6 +20,8 @@ namespace NugetPackage.Model
         public string StartSearch { get; set; }
         public string ResultPackage { get; set; }
         public string ResultLog { get; set; }
+        public string DescriptionPackage { get; set; }
+        public string DependencyPackage { get; set; }
         #endregion
 
         #region =================== costruttori ================
