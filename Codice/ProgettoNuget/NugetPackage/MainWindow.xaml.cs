@@ -23,16 +23,14 @@ namespace NugetPackage
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        SettingViewModel vm = new SettingViewModel(DialogCoordinator.Instance);
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = vm;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            string x = await this.ShowInputAsync("This is the title", "Add something");
         }
     }
 }

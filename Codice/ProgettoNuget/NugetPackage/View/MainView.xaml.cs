@@ -1,4 +1,6 @@
-﻿using NuGet;
+﻿using MahApps.Metro.Controls.Dialogs;
+using NuGet;
+using NugetPackage.ViewModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
@@ -14,6 +16,7 @@ namespace NugetPackage.View
         {
             InitializeComponent();
         }
+
         private void logArea_TextChanged(object sender, TextChangedEventArgs e)
         {
             logArea.ScrollToEnd();

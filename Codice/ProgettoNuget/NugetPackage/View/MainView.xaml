@@ -4,12 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NugetPackage.View"
+             DataContext="{Binding Source={StaticResource Locator}, Path=Nuget}"
              xmlns:viewmodels="clr-namespace:NugetPackage.ViewModel"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" Height="650" Width="725">
-    <UserControl.DataContext>
-        <viewmodels:NugetViewModel></viewmodels:NugetViewModel>
-    </UserControl.DataContext>
 
     <Grid>
         <i:Interaction.Triggers>

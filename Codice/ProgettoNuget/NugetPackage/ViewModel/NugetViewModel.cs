@@ -1,5 +1,5 @@
-﻿using MahApps.Metro.Controls.Dialogs;
-using NuGet;
+﻿using NuGet;
+using NugetPackage.Helper;
 using NugetPackage.Model;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace NugetPackage.ViewModel
 {
-    public class NugetViewModel : INotifyPropertyChanged
+    public class NugetViewModel : BindableBase, INotifyPropertyChanged
     {
         #region =================== costanti ===================
         #endregion
