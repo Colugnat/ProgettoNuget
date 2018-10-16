@@ -50,6 +50,15 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("VersionPackage");
             }
         }
+        public string VersionNewsPackage
+        {
+            get { return model.VersionNewsPackage; }
+            set
+            {
+                model.VersionNewsPackage = value;
+                OnPropertyChanged("VersionNewsPackage");
+            }
+        }
         public ObservableCollection<string> ResultSearch
         {
             get { return model.ResultSearch; }
@@ -254,11 +263,30 @@ namespace NugetPackage.ViewModel
         private void OnShow(object obj)
         {
             string packageID = NamePackage;
+
             // Connection with the Nuget database
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
             // Version of the selected package
             VersionPackage = repo.Search(packageID, false).First().Version.ToString();
             OnPropertyChanged("VersionPackage");
+
+            string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
+            bool news = false;
+            // Create a list for put the name package inside
+            for (int i = 0; i < fileNewsContent.Count(); i++)
+            {
+                string[] getVersion = fileNewsContent[i].Split(':');
+                string[] nameCurrentId = getVersion[1].Split('\\');
+                // Id of the package inside the file logFileNews.txt
+                string package = nameCurrentId[nameCurrentId.Length - 1];
+                if ((packageID == package) && (getVersion[2] != VersionPackage))
+                {
+                    news = true;
+                    VersionNewsPackage = getVersion[2];
+                    OnPropertyChanged("VersionNewsPackage");
+                }
+            }
+
             // Description of the selected package
             DescriptionPackage = repo.FindPackagesById(packageID).First().Description.ToString();
             OnPropertyChanged("DescriptionPackage");
@@ -269,10 +297,19 @@ namespace NugetPackage.ViewModel
                 DependencyPackage = "No dependency";
             DependencyPackage = " - " + DependencyPackage;
             OnPropertyChanged("DependencyPackage");
-            // Put all the information inside a string
-            string text = "Name: " + NamePackage + "\nVersion: " + VersionPackage + "\nDescription: \n" + DescriptionPackage + "\nDependency: \n" + DependencyPackage;
-            ResultPackage = text;
-            OnPropertyChanged("ResultPackage");
+            if(!news)
+            {
+                // Put all the information inside a string
+                string text = "Name: " + NamePackage + "\nVersion: " + VersionPackage + "\nDescription: \n" + DescriptionPackage + "\nDependency: \n" + DependencyPackage;
+                ResultPackage = text;
+                OnPropertyChanged("ResultPackage");
+            } else
+            {
+                // Put all the information inside a string
+                string text = "Name: " + NamePackage + "\nVersion: " + VersionNewsPackage + " -> " + VersionPackage + "\nDescription: \n" + DescriptionPackage + "\nDependency: \n" + DependencyPackage;
+                ResultPackage = text;
+                OnPropertyChanged("ResultPackage");
+            }
             // Information about what happend in the programm
             ResultLog += "Selected package " + NamePackage + "\n";
             OnPropertyChanged("ResultLog");

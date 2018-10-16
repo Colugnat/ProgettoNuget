@@ -15,6 +15,7 @@ namespace NugetPackage.Model
         public string Directory { get; set; }
         public string NamePackage { get; set; }
         public string VersionPackage { get; set; }
+        public string VersionNewsPackage { get; set; }
         public ObservableCollection<string> ResultSearch { get; set; }
         public ObservableCollection<string> ResultSearchNews { get; set; }
         public string StartSearch { get; set; }
