@@ -10,7 +10,7 @@
         Title="Nuget download" Height="690" Width="750" ResizeMode="NoResize" Background="#FF1F1F1F" Foreground="White" ShowIconOnTitleBar="True">
     <Controls:MetroWindow.RightWindowCommands>
             <Controls:WindowCommands>
-                <Button Content="settings" />
+            <Button Content="settings" Click="Button_Click"/>
             </Controls:WindowCommands>
         </Controls:MetroWindow.RightWindowCommands>
     <view:MainView/>

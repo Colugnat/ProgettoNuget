@@ -14,7 +14,6 @@ namespace NugetPackage.View
         {
             InitializeComponent();
         }
-
         private void logArea_TextChanged(object sender, TextChangedEventArgs e)
         {
             logArea.ScrollToEnd();

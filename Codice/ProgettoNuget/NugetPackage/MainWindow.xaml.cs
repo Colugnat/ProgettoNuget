@@ -1,4 +1,6 @@
 ﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using NugetPackage.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +23,16 @@ namespace NugetPackage
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        SettingViewModel vm = new SettingViewModel(DialogCoordinator.Instance);
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = vm;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

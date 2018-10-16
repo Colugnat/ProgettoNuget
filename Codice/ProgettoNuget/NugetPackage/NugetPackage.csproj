@@ -95,6 +95,7 @@
     <Compile Include="Helper\IDelegateCommand.cs" />
     <Compile Include="Model\Nuget.cs" />
     <Compile Include="ViewModel\NugetViewModel.cs" />
+    <Compile Include="ViewModel\SettingViewModel.cs" />
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>

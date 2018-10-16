@@ -1,4 +1,5 @@
-﻿using NuGet;
+﻿using MahApps.Metro.Controls.Dialogs;
+using NuGet;
 using NugetPackage.Model;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
