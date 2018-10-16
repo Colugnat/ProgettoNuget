@@ -1,0 +1,72 @@
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\01 BaseMVVM.exe.config
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\01 BaseMVVM.exe
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\01 BaseMVVM.pdb
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\Microsoft.Web.XmlTransform.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\NuGet.Core.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\NugetPackage.csprojResolveAssemblyReference.cache
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\MainWindow.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\View\MainView.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\App.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\01 BaseMVVM_MarkupCompile.cache
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\01 BaseMVVM_MarkupCompile.lref
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\MainWindow.baml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\View\MainView.baml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\01 BaseMVVM.g.resources
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\NugetPackage.Properties.Resources.resources
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\NugetPackage.csproj.GenerateResource.Cache
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\NugetPackage.csproj.CoreCompileInputs.cache
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\01 BaseMVVM.exe
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\01 BaseMVVM.pdb
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\WPFFolderBrowser.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\ControlzEx.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\MahApps.Metro.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\ControlzEx.pdb
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\MahApps.Metro.pdb
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\MahApps.Metro.xml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\App.baml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\PdfSharp.Charting.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\PdfSharp.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\PdfSharp.xml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\PdfSharp.Charting.xml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\de\PdfSharp.Charting.resources.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\01 BaseMVVM.exe.config
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\01 BaseMVVM.exe
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\01 BaseMVVM.pdb
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\ControlzEx.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\MahApps.Metro.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\Microsoft.Web.XmlTransform.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\NuGet.Core.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\PdfSharp.Charting.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\PdfSharp.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\WPFFolderBrowser.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\ControlzEx.pdb
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\MahApps.Metro.pdb
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\MahApps.Metro.xml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\PdfSharp.xml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\PdfSharp.Charting.xml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\bin\Debug\de\PdfSharp.Charting.resources.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\NugetPackage.csprojResolveAssemblyReference.cache
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\MainWindow.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\View\MainView.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\App.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\01 BaseMVVM_MarkupCompile.cache
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\01 BaseMVVM_MarkupCompile.lref
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\App.baml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\MainWindow.baml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\View\MainView.baml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\01 BaseMVVM.g.resources
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\NugetPackage.Properties.Resources.resources
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\NugetPackage.csproj.GenerateResource.Cache
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\NugetPackage.csproj.CoreCompileInputs.cache
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\01 BaseMVVM.exe
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\01 BaseMVVM.pdb
