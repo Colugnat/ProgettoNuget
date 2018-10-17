@@ -24,5 +24,13 @@ namespace NugetPackage.View
         {
             InitializeComponent();
         }
+        private void logArea_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            logArea.ScrollToEnd();
+        }
+        private void logArea_Loaded(object sender, RoutedEventArgs e)
+        {
+            logArea.ScrollToEnd();
+        }
     }
 }
