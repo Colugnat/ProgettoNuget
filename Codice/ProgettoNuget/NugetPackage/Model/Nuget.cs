@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace NugetPackage.Model
 {
-    class Nuget
+    public class Nuget
     {
         #region =================== costanti ===================
         #endregion
