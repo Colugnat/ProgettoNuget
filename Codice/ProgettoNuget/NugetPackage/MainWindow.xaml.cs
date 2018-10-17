@@ -27,10 +27,5 @@ namespace NugetPackage
         {
             InitializeComponent();
         }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            string x = await this.ShowInputAsync("This is the title", "Add something");
-        }
     }
 }

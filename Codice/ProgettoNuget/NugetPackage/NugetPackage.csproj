@@ -111,6 +111,7 @@
     <Compile Include="Helper\ISimpleIoc.cs" />
     <Compile Include="Helper\PreferredConstructorAttribute.cs" />
     <Compile Include="Helper\SimpleIoc.cs" />
+    <Compile Include="Helper\ViewBindableBase.cs" />
     <Compile Include="Model\Nuget.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NugetViewModel.cs" />

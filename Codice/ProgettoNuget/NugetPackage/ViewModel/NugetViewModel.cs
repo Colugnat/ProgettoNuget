@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace NugetPackage.ViewModel
 {
-    public class NugetViewModel : BindableBase, INotifyPropertyChanged
+    public class NugetViewModel : BindableBase
     {
         #region =================== costanti ===================
         #endregion
@@ -25,7 +25,6 @@ namespace NugetPackage.ViewModel
         #endregion
 
         #region =================== membri & proprietà ===========
-        public event PropertyChangedEventHandler PropertyChanged;
         private Nuget model;
         public string Directory
         {
@@ -136,10 +135,6 @@ namespace NugetPackage.ViewModel
         #endregion
 
         #region =================== metodi aiuto ===============
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
         #endregion
 
         #region =================== metodi generali ============
