@@ -79,3 +79,5 @@ C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debu
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\View\SettingView.g.cs
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\View\SettingView.baml
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\WinFormAnimation.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\WinFormAnimation.xml
