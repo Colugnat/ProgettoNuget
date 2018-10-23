@@ -156,7 +156,7 @@ namespace NugetPackage.ViewModel
                 File.Create("logFileNews.txt");
                 return false;
             }
-            // Control the internet connection
+            // Check the internet connection
             try
             {
                 using (var client = new WebClient())
@@ -204,7 +204,7 @@ namespace NugetPackage.ViewModel
 
         private bool CanSearch(object arg)
         {
-            // Control the internet connection
+            // Check the internet connection
             try
             {
                 using (var client = new WebClient())
@@ -449,13 +449,19 @@ namespace NugetPackage.ViewModel
         }
         private void createPDF()
         {
+            // Initialize a pdf document object
             PdfDocument pdf = new PdfDocument();
+            // Title of the document
             pdf.Info.Title = NamePackage;
+            // Add the first page
             PdfPage pdfPage = pdf.AddPage();
+            // Settings for the graphics
             XGraphics graph = XGraphics.FromPdfPage(pdfPage);
             XFont font = new XFont("Arial", 14, XFontStyle.Regular);
             XFont fontTitle = new XFont("Arial", 16, XFontStyle.Bold);
+            // Split everytime the is a new line
             string[] linesDescription = DescriptionPackage.Split('\n');
+            // Add the informatione about the Nuget package
             graph.DrawString("Title:", fontTitle, XBrushes.Black, new XRect(20, 20, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
             graph.DrawString(NamePackage, font, XBrushes.Black, new XRect(20, 40, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
             graph.DrawString("Version:", fontTitle, XBrushes.Black, new XRect(20, 60, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
@@ -480,6 +486,7 @@ namespace NugetPackage.ViewModel
                 newLine += 20;
             }
             string pdfFilename = NamePackage + "." + VersionPackage + ".pdf";
+            // Save the file in the specific folder
             pdf.Save(Directory + "\\" + NamePackage + "." + VersionPackage + "\\" +  pdfFilename);
         }
         #endregion
