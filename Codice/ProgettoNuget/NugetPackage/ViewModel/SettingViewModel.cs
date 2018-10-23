@@ -25,23 +25,23 @@ namespace NugetPackage.ViewModel
         #endregion
 
         #region =================== membri & proprietà ===========
-        private Nuget model;
+        
         public string Directory
         {
-            get { return model.Directory; }
+            get { return Nuget.Directory; }
             set
             {
-                model.Directory = value;
+                Nuget.Directory = value;
                 OnPropertyChanged("Directory");
             }
         }
 
         public string ResultLog
         {
-            get { return model.ResultLog; }
+            get { return Nuget.ResultLog; }
             set
             {
-                model.ResultLog = value;
+                Nuget.ResultLog = value;
                 OnPropertyChanged("ResultLog");
             }
         }
@@ -52,7 +52,6 @@ namespace NugetPackage.ViewModel
         #region =================== costruttori ================
         public SettingViewModel()
         {
-            model = new Nuget();
             RegisterCommands();
         }
         #endregion
