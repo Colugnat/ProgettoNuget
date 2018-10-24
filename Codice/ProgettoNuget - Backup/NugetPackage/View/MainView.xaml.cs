@@ -1,6 +1,9 @@
-﻿using NuGet;
+﻿using MahApps.Metro.Controls.Dialogs;
+using NuGet;
+using NugetPackage.ViewModel;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace NugetPackage.View
@@ -16,6 +19,10 @@ namespace NugetPackage.View
         }
 
         private void logArea_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            logArea.ScrollToEnd();
+        }
+        private void logArea_Loaded(object sender, RoutedEventArgs e)
         {
             logArea.ScrollToEnd();
         }

@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace NugetPackage.Model
 {
-    class Nuget
+    public static class Nuget
     {
         #region =================== costanti ===================
         #endregion
@@ -12,17 +12,17 @@ namespace NugetPackage.Model
         #endregion
 
         #region =================== membri & proprietà ===========
-        public string Directory { get; set; }
-        public string NamePackage { get; set; }
-        public string VersionPackage { get; set; }
-        public string VersionNewsPackage { get; set; }
-        public ObservableCollection<string> ResultSearch { get; set; }
-        public ObservableCollection<string> ResultSearchNews { get; set; }
-        public string StartSearch { get; set; }
-        public string ResultPackage { get; set; }
-        public string ResultLog { get; set; }
-        public string DescriptionPackage { get; set; }
-        public string DependencyPackage { get; set; }
+        public static string Directory { get; set; }
+        public static string NamePackage { get; set; }
+        public static string VersionPackage { get; set; }
+        public static string VersionNewsPackage { get; set; }
+        public static ObservableCollection<string> ResultSearch { get; set; }
+        public static ObservableCollection<string> ResultSearchNews { get; set; }
+        public static string StartSearch { get; set; }
+        public static string ResultPackage { get; set; }
+        public static string ResultLog { get; set; }
+        public static string DescriptionPackage { get; set; }
+        public static string DependencyPackage { get; set; }
         #endregion
 
         #region =================== costruttori ================

@@ -70,3 +70,14 @@ C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\NugetPackage.csproj.CoreCompileInputs.cache
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\01 BaseMVVM.exe
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget - Backup\NugetPackage\obj\Debug\01 BaseMVVM.pdb
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\Microsoft.Threading.Tasks.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\Microsoft.Threading.Tasks.xml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\View\SettingView.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\View\SettingView.baml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\WinFormAnimation.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\WinFormAnimation.xml

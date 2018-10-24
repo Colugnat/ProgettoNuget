@@ -1,4 +1,5 @@
 ﻿using NuGet;
+using NugetPackage.Helper;
 using NugetPackage.Model;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -15,7 +16,7 @@ using System.Windows.Forms;
 
 namespace NugetPackage.ViewModel
 {
-    public class NugetViewModel : INotifyPropertyChanged
+    public class NugetViewModel : BindableBase
     {
         #region =================== costanti ===================
         #endregion
@@ -24,98 +25,96 @@ namespace NugetPackage.ViewModel
         #endregion
 
         #region =================== membri & proprietà ===========
-        public event PropertyChangedEventHandler PropertyChanged;
-        private Nuget model;
         public string Directory
         {
-            get { return model.Directory; }
+            get { return Nuget.Directory; }
             set {
-                model.Directory = value;
+                Nuget.Directory = value;
                 OnPropertyChanged("Directory");
             }
         }
         public string NamePackage
         {
-            get { return model.NamePackage; }
+            get { return Nuget.NamePackage; }
             set {
-                model.NamePackage = value;
+                Nuget.NamePackage = value;
                 OnPropertyChanged("NamePackage");
             }
         }
         public string VersionPackage
         {
-            get { return model.VersionPackage; }
+            get { return Nuget.VersionPackage; }
             set {
-                model.VersionPackage = value;
+                Nuget.VersionPackage = value;
                 OnPropertyChanged("VersionPackage");
             }
         }
         public string VersionNewsPackage
         {
-            get { return model.VersionNewsPackage; }
+            get { return Nuget.VersionNewsPackage; }
             set
             {
-                model.VersionNewsPackage = value;
+                Nuget.VersionNewsPackage = value;
                 OnPropertyChanged("VersionNewsPackage");
             }
         }
         public ObservableCollection<string> ResultSearch
         {
-            get { return model.ResultSearch; }
+            get { return Nuget.ResultSearch; }
             set {
-                model.ResultSearch = value;
+                Nuget.ResultSearch = value;
                 OnPropertyChanged("ResultSearch");
             }
         }
         public ObservableCollection<string> ResultSearchNews
         {
-            get { return model.ResultSearchNews; }
+            get { return Nuget.ResultSearchNews; }
             set
             {
-                model.ResultSearchNews = value;
+                Nuget.ResultSearchNews = value;
                 OnPropertyChanged("ResultSearchNews");
             }
         }
         public string ResultPackage
         {
-            get { return model.ResultPackage; }
+            get { return Nuget.ResultPackage; }
             set {
-                model.ResultPackage = value;
+                Nuget.ResultPackage = value;
                 OnPropertyChanged("ResultPackage");
             }
         }
         public string StartSearch
         {
-            get { return model.StartSearch; }
+            get { return Nuget.StartSearch; }
             set {
-                model.StartSearch = value;
+                Nuget.StartSearch = value;
                 OnPropertyChanged("StartSearch");
             }
         }
         public string ResultLog
         {
-            get { return model.ResultLog; }
+            get { return Nuget.ResultLog; }
             set
             {
-                model.ResultLog = value;
+                Nuget.ResultLog = value;
                 OnPropertyChanged("ResultLog");
             }
         }
         public string DescriptionPackage
         {
-            get { return model.DescriptionPackage; }
+            get { return Nuget.DescriptionPackage; }
             set
             {
-                model.DescriptionPackage = value;
+                Nuget.DescriptionPackage = value;
                 OnPropertyChanged("DescriptionPackage");
             }
         }
         public string DependencyPackage
         {
-            get { return model.DependencyPackage; }
+            get { return Nuget.DependencyPackage; }
             set
             {
-                model.DependencyPackage = value;
+                Nuget.DependencyPackage = value;
                 OnPropertyChanged("DependencyPackage");
             }
         }
@@ -129,22 +128,16 @@ namespace NugetPackage.ViewModel
         #region =================== costruttori ================
         public NugetViewModel()
         {
-            model = new Nuget();
             RegisterCommands();
         }
         #endregion
 
         #region =================== metodi aiuto ===============
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
         #endregion
 
         #region =================== metodi generali ============
         protected void RegisterCommands()
         {
-            BrowseCommand = new DelegateCommand(OnBrowse, CanBrowse);
             SaveCommand = new DelegateCommand(OnSave, CanSave);
             ShowCommand = new DelegateCommand(OnShow, CanShow);
             SearchCommand = new DelegateCommand(OnSearch, CanSearch);
@@ -160,7 +153,7 @@ namespace NugetPackage.ViewModel
                 File.Create("logFileNews.txt");
                 return false;
             }
-            // Control the internet connection
+            // Check the internet connection
             try
             {
                 using (var client = new WebClient())
@@ -208,7 +201,7 @@ namespace NugetPackage.ViewModel
 
         private bool CanSearch(object arg)
         {
-            // Control the internet connection
+            // Check the internet connection
             try
             {
                 using (var client = new WebClient())
@@ -429,43 +422,28 @@ namespace NugetPackage.ViewModel
             }
         }
 
-        private bool CanBrowse(object arg)
-        {
-            return true;
-            //No exception
-        }
-
-        private void OnBrowse(object obj)
-        {
-            // Code that allows you to open a window to choose the path to save the Nuget package
-            FolderBrowserDialog folderDialog = new FolderBrowserDialog {
-                SelectedPath = "C:\\"
-            };
-
-            DialogResult result = folderDialog.ShowDialog();
-            if (result.ToString() == "OK") {
-                Directory = folderDialog.SelectedPath;
-                OnPropertyChanged("Directory");
-                File.WriteAllText("logFilePath.txt", Directory);
-                ResultLog += "Selected path " + Directory + "\n";
-                OnPropertyChanged("ResultLog");
-            }
-        }
         private void createPDF()
         {
+            // Initialize a pdf document object
             PdfDocument pdf = new PdfDocument();
+            // Title of the document
             pdf.Info.Title = NamePackage;
+            // Add the first page
             PdfPage pdfPage = pdf.AddPage();
+            // Settings for the graphics
             XGraphics graph = XGraphics.FromPdfPage(pdfPage);
             XFont font = new XFont("Arial", 14, XFontStyle.Regular);
             XFont fontTitle = new XFont("Arial", 16, XFontStyle.Bold);
+            // Split everytime the is a new line
             string[] linesDescription = DescriptionPackage.Split('\n');
+            // Add the informatione about the Nuget package
             graph.DrawString("Title:", fontTitle, XBrushes.Black, new XRect(20, 20, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
             graph.DrawString(NamePackage, font, XBrushes.Black, new XRect(20, 40, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
             graph.DrawString("Version:", fontTitle, XBrushes.Black, new XRect(20, 60, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
             graph.DrawString(VersionPackage, font, XBrushes.Black, new XRect(20, 80, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
             graph.DrawString("Description:", fontTitle, XBrushes.Black, new XRect(20, 100, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
             int newLine = 120;
+            // Add a new line every 80 char
             foreach (string lineDescription in linesDescription)
             {
                 string[] resLineDescription = Regex.Split(Regex.Replace(lineDescription, "(.{" + 80 + "})", "$1" + Environment.NewLine), "\n");
@@ -484,6 +462,7 @@ namespace NugetPackage.ViewModel
                 newLine += 20;
             }
             string pdfFilename = NamePackage + "." + VersionPackage + ".pdf";
+            // Save the file in the specific folder
             pdf.Save(Directory + "\\" + NamePackage + "." + VersionPackage + "\\" +  pdfFilename);
         }
         #endregion
