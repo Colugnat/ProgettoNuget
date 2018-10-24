@@ -43,3 +43,7 @@ C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Rele
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\View\SettingView.g.cs
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\App.baml
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\View\SettingView.baml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\WinFormAnimation.dll
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\WinFormAnimation.xml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\View\InstalledView.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\View\InstalledView.baml
