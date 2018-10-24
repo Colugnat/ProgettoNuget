@@ -165,7 +165,6 @@ namespace NugetPackage.ViewModel
             catch
             {
                 ResultLog = "No internet connection\n";
-                OnPropertyChanged("ResultLog");
                 return false;
             }
         }
@@ -196,7 +195,6 @@ namespace NugetPackage.ViewModel
                     ResultSearchNews.Add(package.Id);
                 }
             }
-            OnPropertyChanged("ResultSearchNews");
         }
 
         private bool CanSearch(object arg)
@@ -213,7 +211,6 @@ namespace NugetPackage.ViewModel
             catch
             {
                 ResultLog = "No internet connection\n";
-                OnPropertyChanged("ResultLog");
                 return false;
             }
         }
@@ -237,7 +234,6 @@ namespace NugetPackage.ViewModel
             {
                 ResultSearch.Add(p.Id);
             }
-            OnPropertyChanged("ResultSearch");
         }
         private bool CanShow(object arg)
         {
@@ -245,7 +241,6 @@ namespace NugetPackage.ViewModel
             if (NamePackage == null)
             {
                 ResultLog += "No package selected\n";
-                OnPropertyChanged("ResultLog");
                 return false;
             }
             else
@@ -261,7 +256,6 @@ namespace NugetPackage.ViewModel
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
             // Version of the selected package
             VersionPackage = repo.Search(packageID, false).First().Version.ToString();
-            OnPropertyChanged("VersionPackage");
 
             string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
             bool news = false;
@@ -276,36 +270,30 @@ namespace NugetPackage.ViewModel
                 {
                     news = true;
                     VersionNewsPackage = getVersion[2];
-                    OnPropertyChanged("VersionNewsPackage");
                 }
             }
 
             // Description of the selected package
             DescriptionPackage = repo.FindPackagesById(packageID).First().Description.ToString();
-            OnPropertyChanged("DescriptionPackage");
             // Check the dependency of the Nuget package
             FrameworkName frameworkName = new FrameworkName("Anything", new Version("3.5"));
             DependencyPackage = string.Join("\n - ", repo.Search(packageID, false).First().GetCompatiblePackageDependencies(frameworkName).Select(x => x));
             if (DependencyPackage == "")
                 DependencyPackage = "No dependency";
             DependencyPackage = " - " + DependencyPackage;
-            OnPropertyChanged("DependencyPackage");
             if(!news)
             {
                 // Put all the information inside a string
                 string text = "Name: " + NamePackage + "\nVersion: " + VersionPackage + "\nDescription: \n" + DescriptionPackage + "\nDependency: \n" + DependencyPackage;
                 ResultPackage = text;
-                OnPropertyChanged("ResultPackage");
             } else
             {
                 // Put all the information inside a string
                 string text = "Name: " + NamePackage + "\nVersion: " + VersionNewsPackage + " -> " + VersionPackage + "\nDescription: \n" + DescriptionPackage + "\nDependency: \n" + DependencyPackage;
                 ResultPackage = text;
-                OnPropertyChanged("ResultPackage");
             }
             // Information about what happend in the programm
             ResultLog += "Selected package " + NamePackage + "\n";
-            OnPropertyChanged("ResultLog");
         }
 
         private bool CanSave(object arg)
@@ -353,7 +341,6 @@ namespace NugetPackage.ViewModel
                     {
                         Directory = defaultPath;
                         ResultLog += "No path setted, the package will be saved in the default path (" + Directory + ")\n";
-                        OnPropertyChanged("ResultLog");
                     }
                     // Connection with the Nuget database
                     IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
@@ -412,13 +399,11 @@ namespace NugetPackage.ViewModel
                     File.WriteAllText("logFilePath.txt", Directory);
                     // Information when the package is downloaded in the computer
                     ResultLog += "Package " + NamePackage + " saved with dependency in the path " + Directory + "\n";
-                    OnPropertyChanged("ResultLog");
                 }
             }
             else
             {
                 ResultLog += "No package selected\n";
-                OnPropertyChanged("ResultLog");
             }
         }
 

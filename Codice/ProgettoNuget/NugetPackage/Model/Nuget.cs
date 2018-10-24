@@ -23,6 +23,9 @@ namespace NugetPackage.Model
         public static string ResultLog { get; set; }
         public static string DescriptionPackage { get; set; }
         public static string DependencyPackage { get; set; }
+        public static ObservableCollection<string> InstalledPackage { get; set; }
+        public static string NameInstalledPackage { get; set; }
+        public static string ResultInstalledPackage { get; set; }
         #endregion
 
         #region =================== costruttori ================

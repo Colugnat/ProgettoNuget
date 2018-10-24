@@ -22,11 +22,16 @@ namespace NugetPackage.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<SettingViewModel>(); }
         }
+        public static InstalledViewModel Installed
+        {
+            get { return ServiceLocator.Current.GetInstance<InstalledViewModel>(); }
+        }
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<SettingViewModel>();
+            SimpleIoc.Default.Register<InstalledViewModel>();
             SimpleIoc.Default.Register<NugetViewModel>(true);
         }
     }

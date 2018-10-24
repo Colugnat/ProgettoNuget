@@ -14,7 +14,8 @@
             <metro:WindowCommands>
                 <Button Content="home" Command="{Binding Path=NugetPageCommand}"/>
                 <Button Content="settings" Command="{Binding Path=SettingPageCommand}"/>
-            </metro:WindowCommands>
+                <Button Content="installed" Command="{Binding Path=InstalledPageCommand}"/>
+        </metro:WindowCommands>
         </metro:MetroWindow.RightWindowCommands>
         <UserControl>
         <UserControl.Resources>
@@ -23,6 +24,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodel:SettingViewModel}">
                 <view:SettingView></view:SettingView>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:InstalledViewModel}">
+                <view:InstalledView></view:InstalledView>
             </DataTemplate>
         </UserControl.Resources>
         <Grid>

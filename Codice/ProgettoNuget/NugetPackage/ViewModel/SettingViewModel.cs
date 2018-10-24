@@ -35,7 +35,6 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("Directory");
             }
         }
-
         public string ResultLog
         {
             get { return Nuget.ResultLog; }

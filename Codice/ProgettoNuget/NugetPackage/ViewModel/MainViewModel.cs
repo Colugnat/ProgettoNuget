@@ -22,12 +22,25 @@ namespace NugetPackage.ViewModel
         }
         public IDelegateCommand NugetPageCommand { get; private set; }
         public IDelegateCommand SettingPageCommand { get; private set; }
+        public IDelegateCommand InstalledPageCommand { get; private set; }
         public MainViewModel()
         {
             SettingPageCommand = new DelegateCommand(OnSettingPage, CanSettingPage);
             NugetPageCommand = new DelegateCommand(OnNugetPage, CanNugetPage);
+            InstalledPageCommand = new DelegateCommand(OnInstalledPage, CanInstalledPage);
             CurrentViewModel = ViewModelLocator.Nuget;
         }
+
+        private bool CanInstalledPage(object arg)
+        {
+            return true;
+        }
+
+        private void OnInstalledPage(object obj)
+        {
+            CurrentViewModel = ViewModelLocator.Installed;
+        }
+
         private bool CanSettingPage(object arg)
         {
             return true;
