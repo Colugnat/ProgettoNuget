@@ -1,4 +1,6 @@
 ﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using NugetPackage.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
