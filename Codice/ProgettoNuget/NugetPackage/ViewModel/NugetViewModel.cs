@@ -227,7 +227,7 @@ namespace NugetPackage.ViewModel
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
 
             // Receive the list of all package searched 
-            List<IPackage> packages = repo.Search(packageID, false).Take(14).ToList();
+            List<IPackage> packages = repo.Search(packageID, false).Take(15).ToList();
 
             // Create a list
             ResultSearch = new ObservableCollection<string>();
