@@ -83,3 +83,5 @@ C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debu
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Debug\WinFormAnimation.xml
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\View\InstalledView.g.cs
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\View\InstalledView.baml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\View\AboutView.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Debug\View\AboutView.baml

@@ -1,6 +1,8 @@
 ﻿using NuGet;
 using NugetPackage.Helper;
 using NugetPackage.Model;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.Versioning;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace NugetPackage.ViewModel
@@ -22,6 +25,15 @@ namespace NugetPackage.ViewModel
         #endregion
 
         #region =================== membri & proprietà ===========
+        public string Directory
+        {
+            get { return Nuget.Directory; }
+            set
+            {
+                Nuget.Directory = value;
+                OnPropertyChanged("Directory");
+            }
+        }
         public ObservableCollection<string> InstalledPackage
         {
             get { return Nuget.InstalledPackage; }
@@ -70,6 +82,7 @@ namespace NugetPackage.ViewModel
         public IDelegateCommand DeleteCommand { get; protected set; }
         public IDelegateCommand ShowInstalledCommand { get; protected set; }
         public IDelegateCommand SearchInstalledCommand { get; protected set; }
+        public IDelegateCommand GenerateCommand { get; protected set; }
         #endregion
 
         #region =================== costruttori ================
@@ -88,6 +101,7 @@ namespace NugetPackage.ViewModel
             ShowInstalledCommand = new DelegateCommand(OnShowInstalled, CanShowInstalled);
             DeleteCommand = new DelegateCommand(OnDelete, CanDelete);
             SearchInstalledCommand = new DelegateCommand(OnSearchInstalled, CanSearchInstalled);
+            GenerateCommand = new DelegateCommand(OnGenerate, CanGenerate);
         }
 
         private bool CanSearchInstalled(object arg)
@@ -190,7 +204,7 @@ namespace NugetPackage.ViewModel
         {
             if (PathInstalledPackage != null)
             {
-                Directory.Delete(PathInstalledPackage, true);
+                System.IO.Directory.Delete(PathInstalledPackage, true);
 
                 // Read all lines inside the logFileNews.txt
                 string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
@@ -219,6 +233,68 @@ namespace NugetPackage.ViewModel
                 // Information about what happend in the programm
                 ResultLog += "Deleted package " + NameInstalledPackage + " in the path: " + PathInstalledPackage + "\n";
             }
+        }
+        private bool CanGenerate(object arg)
+        {
+            return true;
+        }
+
+        private void OnGenerate(object obj)
+        {
+            // Initialize a pdf document object
+            PdfDocument pdf = new PdfDocument();
+            // Title of the document
+            pdf.Info.Title = "Installed package";
+            // Add the first page
+            PdfPage pdfPage = pdf.AddPage();
+            // Settings for the graphics
+            XGraphics graph = XGraphics.FromPdfPage(pdfPage);
+            XFont font = new XFont("Arial", 11, XFontStyle.Regular);
+            XFont fontTitle = new XFont("Arial", 12, XFontStyle.Bold);
+            string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
+            // Create a list for put the name package inside
+            int newLine = 20;
+            foreach (string newsName in fileNewsContent)
+            {
+                string[] getVersion = newsName.Split(':');
+                string[] nameCurrentId = getVersion[1].Split('\\');
+                // Id of the package inside the file logFileNews.txt
+                string packageID = nameCurrentId[nameCurrentId.Length - 1];
+                // Connection with the Nuget database
+                IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+                // Search all the file with the specified ID
+                IPackage package = repo.Search(packageID, false).First();
+                graph.DrawString("Title:", fontTitle, XBrushes.Black, new XRect(20, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+                graph.DrawString(packageID, font, XBrushes.Black, new XRect(140, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+                newLine += 20;
+                graph.DrawString("Version:", fontTitle, XBrushes.Black, new XRect(20, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+                graph.DrawString(getVersion[getVersion.Length - 1], font, XBrushes.Black, new XRect(140, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+                newLine += 20;
+                graph.DrawString("Dependency:", fontTitle, XBrushes.Black, new XRect(20, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+                FrameworkName frameworkName = new FrameworkName("Anything", new Version("3.5"));
+                string dependencyPackage = string.Join(", ", repo.Search(packageID, false).First().GetCompatiblePackageDependencies(frameworkName).Select(x => x));
+                if (dependencyPackage == "")
+                    dependencyPackage = "No dependency";
+                graph.DrawString(dependencyPackage, font, XBrushes.Black, new XRect(140, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+                newLine += 30;
+                graph.DrawString("", font, XBrushes.Black, new XRect(140, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+                newLine += 20;
+            }
+            string pdfFilename = "InstalledNuget.pdf";
+            // Save the file in the specific folder
+            pdf.Save(Directory + "\\" + pdfFilename);
+            ResultLog += "Generated PDF file in the path " + Directory;
+
+            //// Add a new line every 80 char
+            //foreach (string lineDescription in linesDescription)
+            //{
+            //    string[] resLineDescription = Regex.Split(Regex.Replace(lineDescription, "(.{" + 80 + "})", "$1" + Environment.NewLine), "\n");
+            //    foreach (string finalLine in resLineDescription)
+            //    {
+            //        graph.DrawString(finalLine, font, XBrushes.Black, new XRect(20, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+            //        newLine += 20;
+            //    }
+            //}
         }
         #endregion
     }

@@ -347,7 +347,6 @@ namespace NugetPackage.ViewModel
                     PackageManager packageManager = new PackageManager(repo, Directory);
                     // Downloading and unzipping the Nuget package selected
                     packageManager.InstallPackage(NamePackage, SemanticVersion.Parse(VersionPackage));
-                    createPDF();
                     // Create a information about where and what version of the package is installed
                     string pathVersion = Directory + "\\" + NamePackage + ":" + VersionPackage;
                     // Read all lines inside the logFileNews.txt
@@ -405,50 +404,6 @@ namespace NugetPackage.ViewModel
             {
                 ResultLog += "No package selected\n";
             }
-        }
-
-        private void createPDF()
-        {
-            // Initialize a pdf document object
-            PdfDocument pdf = new PdfDocument();
-            // Title of the document
-            pdf.Info.Title = NamePackage;
-            // Add the first page
-            PdfPage pdfPage = pdf.AddPage();
-            // Settings for the graphics
-            XGraphics graph = XGraphics.FromPdfPage(pdfPage);
-            XFont font = new XFont("Arial", 14, XFontStyle.Regular);
-            XFont fontTitle = new XFont("Arial", 16, XFontStyle.Bold);
-            // Split everytime the is a new line
-            string[] linesDescription = DescriptionPackage.Split('\n');
-            // Add the informatione about the Nuget package
-            graph.DrawString("Title:", fontTitle, XBrushes.Black, new XRect(20, 20, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
-            graph.DrawString(NamePackage, font, XBrushes.Black, new XRect(20, 40, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
-            graph.DrawString("Version:", fontTitle, XBrushes.Black, new XRect(20, 60, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
-            graph.DrawString(VersionPackage, font, XBrushes.Black, new XRect(20, 80, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
-            graph.DrawString("Description:", fontTitle, XBrushes.Black, new XRect(20, 100, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
-            int newLine = 120;
-            // Add a new line every 80 char
-            foreach (string lineDescription in linesDescription)
-            {
-                string[] resLineDescription = Regex.Split(Regex.Replace(lineDescription, "(.{" + 80 + "})", "$1" + Environment.NewLine), "\n");
-                foreach (string finalLine in resLineDescription)
-                {
-                    graph.DrawString(finalLine, font, XBrushes.Black, new XRect(20, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
-                    newLine += 20;
-                }
-            }
-            graph.DrawString("Dependency:", fontTitle, XBrushes.Black, new XRect(20, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
-            newLine += 20;
-            string[] dependencySplitted = DependencyPackage.Split('\n');
-            foreach (string dependencyLine in dependencySplitted)
-            {
-                graph.DrawString(dependencyLine, font, XBrushes.Black, new XRect(20, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
-                newLine += 20;
-            }
-            string pdfFilename = NamePackage + "." + VersionPackage + ".pdf";
-            // Save the file in the specific folder
-            pdf.Save(Directory + "\\" + NamePackage + "." + VersionPackage + "\\" +  pdfFilename);
         }
         #endregion
     }

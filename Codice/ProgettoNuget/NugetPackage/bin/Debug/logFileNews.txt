@@ -1,3 +1,0 @@
-C:\Users\Ringo\Desktop\jQuery:3.3.1
-C:\Users\Ringo\Desktop\jquery.datatables:1.10.15
-C:\Users\Ringo\Desktop\jquery.mobile:1.4.5
