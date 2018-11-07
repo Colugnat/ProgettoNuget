@@ -19,7 +19,7 @@ namespace NugetPackage.ViewModel
         #region =================== membri & proprietà ===========
         public string LegalCopyright
         {
-            get { return ApplicationVersionService.LegalCopyright; }
+            get { return ApplicationVersionService.LegalCopyright + " - Alessandro Colugnat"; }
         }
         public string ProductVersion
         {

@@ -10,11 +10,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.Row="1">
-            <TextBox IsEnabled="False" Text="{Binding Path=LegalCopyright, Mode=OneWay}"></TextBox>
-            <TextBox IsEnabled="False" Text="{Binding Path=ProductVersion, Mode=OneWay}"></TextBox>
-        </StackPanel>
+        <TextBlock FontSize="16" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" Text="Nuget download" Margin="0,0,0,20"></TextBlock>
+        <TextBlock FontSize="16" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="White" Text="{Binding Path=LegalCopyright, Mode=OneWay}"></TextBlock>
+        <TextBlock FontSize="16" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" IsEnabled="False" HorizontalAlignment="Center" Foreground="White" Text="{Binding Path=ProductVersion, Mode=OneWay}"></TextBlock>
+        <TextBlock FontSize="16" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" IsEnabled="False" HorizontalAlignment="Center" Foreground="White" Text="All rights reserved." Margin="0,20,0,0"></TextBlock>
     </Grid>
 </UserControl>

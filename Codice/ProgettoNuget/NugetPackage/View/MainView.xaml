@@ -24,7 +24,7 @@
             <RowDefinition Height="170*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Search: " FontSize="18" Name="search" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Height="24" Grid.Row="0" Margin="70,25,0,23"/>
-        <TextBox FontSize="15" HorizontalAlignment="Center" Text="{Binding Path=StartSearch, UpdateSourceTrigger=PropertyChanged}" Height="26" VerticalAlignment="Center" Width="430" Name="input" Grid.Row="0" Grid.ColumnSpan="2" BorderBrush="{x:Null}">
+        <TextBox FontSize="15" HorizontalAlignment="Center" Text="{Binding Path=StartSearch, UpdateSourceTrigger=PropertyChanged}" Height="30" VerticalAlignment="Center" Width="430" Name="input" Grid.Row="0" Grid.ColumnSpan="2" BorderBrush="white">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="KeyUp">
                     <i:InvokeCommandAction Command="{Binding Path=SearchCommand}"/>
