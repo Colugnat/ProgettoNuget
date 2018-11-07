@@ -204,8 +204,9 @@ namespace NugetPackage.ViewModel
         {
             if (PathInstalledPackage != null)
             {
-                System.IO.Directory.Delete(PathInstalledPackage, true);
-
+                IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+                PackageManager packageManager = new PackageManager(repo, Directory);
+                packageManager.UninstallPackage(NameInstalledPackage);
                 // Read all lines inside the logFileNews.txt
                 string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
                 int i = 0;
@@ -251,9 +252,12 @@ namespace NugetPackage.ViewModel
             XGraphics graph = XGraphics.FromPdfPage(pdfPage);
             XFont font = new XFont("Arial", 11, XFontStyle.Regular);
             XFont fontTitle = new XFont("Arial", 12, XFontStyle.Bold);
+            XFont fontStartTitle = new XFont("Arial", 18, XFontStyle.Bold);
             string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
             // Create a list for put the name package inside
-            int newLine = 20;
+            int newLine = 40;
+            graph.DrawString("Nuget package", fontStartTitle, XBrushes.Black, new XRect(pdfPage.Width.Point/2 - 80, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+            newLine += 60;
             foreach (string newsName in fileNewsContent)
             {
                 string[] getVersion = newsName.Split(':');
@@ -264,37 +268,44 @@ namespace NugetPackage.ViewModel
                 IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
                 // Search all the file with the specified ID
                 IPackage package = repo.Search(packageID, false).First();
-                graph.DrawString("Title:", fontTitle, XBrushes.Black, new XRect(20, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+                graph.DrawString("Title:", fontTitle, XBrushes.Black, new XRect(40, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
                 graph.DrawString(packageID, font, XBrushes.Black, new XRect(140, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
                 newLine += 20;
-                graph.DrawString("Version:", fontTitle, XBrushes.Black, new XRect(20, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+                graph.DrawString("Version:", fontTitle, XBrushes.Black, new XRect(40, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
                 graph.DrawString(getVersion[getVersion.Length - 1], font, XBrushes.Black, new XRect(140, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
                 newLine += 20;
-                graph.DrawString("Dependency:", fontTitle, XBrushes.Black, new XRect(20, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+                graph.DrawString("Dependency:", fontTitle, XBrushes.Black, new XRect(40, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
                 FrameworkName frameworkName = new FrameworkName("Anything", new Version("3.5"));
                 string dependencyPackage = string.Join(", ", repo.Search(packageID, false).First().GetCompatiblePackageDependencies(frameworkName).Select(x => x));
                 if (dependencyPackage == "")
                     dependencyPackage = "No dependency";
-                graph.DrawString(dependencyPackage, font, XBrushes.Black, new XRect(140, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
-                newLine += 30;
+                string[] resLineDependencys = Regex.Split(dependencyPackage, ", ");
+                foreach (string resLineDependency in resLineDependencys)
+                {
+                    graph.DrawString("- " + resLineDependency, font, XBrushes.Black, new XRect(140, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
+                    newLine += 20;
+                }
+                newLine += 5;
                 graph.DrawString("", font, XBrushes.Black, new XRect(140, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
                 newLine += 20;
+                if (newLine >= 700)
+                {
+                    pdfPage = pdf.AddPage();
+                    graph = XGraphics.FromPdfPage(pdfPage);
+                    newLine = 40;
+                }
+
             }
             string pdfFilename = "InstalledNuget.pdf";
             // Save the file in the specific folder
-            pdf.Save(Directory + "\\" + pdfFilename);
-            ResultLog += "Generated PDF file in the path " + Directory;
-
-            //// Add a new line every 80 char
-            //foreach (string lineDescription in linesDescription)
-            //{
-            //    string[] resLineDescription = Regex.Split(Regex.Replace(lineDescription, "(.{" + 80 + "})", "$1" + Environment.NewLine), "\n");
-            //    foreach (string finalLine in resLineDescription)
-            //    {
-            //        graph.DrawString(finalLine, font, XBrushes.Black, new XRect(20, newLine, pdfPage.Width.Point - 20, pdfPage.Height.Point - 20), XStringFormats.TopLeft);
-            //        newLine += 20;
-            //    }
-            //}
+            try
+            {
+                pdf.Save(Directory + "\\" + pdfFilename);
+                ResultLog += "Generated PDF file in the path " + Directory + "\n";
+            } catch (IOException)
+            {
+                ResultLog += "PDF already in use\n";
+            }
         }
         #endregion
     }
