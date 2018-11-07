@@ -10,15 +10,15 @@
         xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="Nuget download" Height="690" Width="750" ResizeMode="NoResize" Background="#FF1F1F1F">
-        <metro:MetroWindow.RightWindowCommands>
-            <metro:WindowCommands>
-                <Button Content="home" Command="{Binding Path=NugetPageCommand}"/>
-                <Button Content="settings" Command="{Binding Path=SettingPageCommand}"/>
-                <Button Content="installed" Command="{Binding Path=InstalledPageCommand}"/>
-                <Button Content="about" Command="{Binding Path=AboutPageCommand}"/>
-            </metro:WindowCommands>
-        </metro:MetroWindow.RightWindowCommands>
-        <UserControl>
+    <metro:MetroWindow.RightWindowCommands>
+        <metro:WindowCommands>
+            <Button Content="home" Command="{Binding Path=NugetPageCommand}"/>
+            <Button Content="settings" Command="{Binding Path=SettingPageCommand}"/>
+            <Button Content="installed" Command="{Binding Path=InstalledPageCommand}"/>
+            <Button Content="about" Command="{Binding Path=AboutPageCommand}"/>
+        </metro:WindowCommands>
+    </metro:MetroWindow.RightWindowCommands>
+    <UserControl>
         <UserControl.Resources>
             <DataTemplate DataType="{x:Type viewmodel:NugetViewModel}">
                 <view:MainView></view:MainView>
