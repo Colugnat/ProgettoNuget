@@ -1,18 +1,13 @@
 ﻿using NuGet;
 using NugetPackage.Helper;
 using NugetPackage.Model;
-using PdfSharp.Drawing;
-using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.Versioning;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace NugetPackage.ViewModel
 {

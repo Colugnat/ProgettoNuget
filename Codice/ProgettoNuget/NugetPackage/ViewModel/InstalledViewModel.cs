@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace NugetPackage.ViewModel
 {
-    public class InstalledViewModel : BindableBase
+    public class InstalledViewModel : BindableBase 
     {
         #region =================== costanti ===================
         #endregion
@@ -235,6 +235,7 @@ namespace NugetPackage.ViewModel
                 ResultLog += "Deleted package " + NameInstalledPackage + " in the path: " + PathInstalledPackage + "\n";
             }
         }
+
         private bool CanGenerate(object arg)
         {
             return true;
