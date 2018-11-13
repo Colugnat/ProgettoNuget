@@ -193,6 +193,7 @@ namespace NugetPackage.ViewModel
             ResultInstalledPackage = text;
             // Information about what happend in the programm
             ResultLog += "Selected package " + packageID + "\n";
+
         }
 
         private bool CanDelete(object arg)
