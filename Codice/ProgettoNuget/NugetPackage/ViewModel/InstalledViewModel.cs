@@ -243,6 +243,7 @@ namespace NugetPackage.ViewModel
                 {
                     ResultLog += ex.Message + "\n";
                 }
+                catch (ArgumentException ex) { }
             }
         }
 
@@ -320,20 +321,17 @@ namespace NugetPackage.ViewModel
         }
         private void DependencyInstalled()
         {
-            try
+            System.IO.Directory.CreateDirectory(Directory);
+            
+            IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+            PackageManager packageManager = new PackageManager(repo, Directory);
+            string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
+            foreach (string elementInstalled in fileNewsContent)
             {
-                IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-                PackageManager packageManager = new PackageManager(repo, Directory);
-                string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
-                foreach (string elementInstalled in fileNewsContent)
-                {
-                    string[] nameVersionElementInstalled = elementInstalled.Split('\\');
-                    string[] nameElementInstalled = nameVersionElementInstalled[nameVersionElementInstalled.Length - 1].Split(':');
-                    SemanticVersion versionPackage = SemanticVersion.Parse(repo.Search(nameElementInstalled[0], false).First().Version.ToString());
-                    packageManager.InstallPackage(nameElementInstalled[0], versionPackage);
-                }
-            } catch (Exception ex) {
-                System.IO.Directory.CreateDirectory(Directory);
+                string[] nameVersionElementInstalled = elementInstalled.Split('\\');
+                string[] nameElementInstalled = nameVersionElementInstalled[nameVersionElementInstalled.Length - 1].Split(':');
+                SemanticVersion versionPackage = SemanticVersion.Parse(repo.Search(nameElementInstalled[0], false).First().Version.ToString());
+                packageManager.InstallPackage(nameElementInstalled[0], versionPackage);
             }
         }
         #endregion
