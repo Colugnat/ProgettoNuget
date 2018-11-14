@@ -107,7 +107,7 @@ namespace NugetPackage.ViewModel
             {
                 Directory = folderDialog.SelectedPath;
                 OnPropertyChanged("Directory");
-                File.WriteAllText("logFilePath.txt", Directory);
+                File.WriteAllText("logFilePath.txt", Directory + "\\NugetPackage");
                 ResultLog += "Selected path " + Directory + "\n";
                 Directory += "\\NugetPackage";
                 OnPropertyChanged("ResultLog");

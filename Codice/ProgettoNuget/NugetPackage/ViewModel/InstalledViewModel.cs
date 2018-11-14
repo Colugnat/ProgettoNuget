@@ -207,33 +207,42 @@ namespace NugetPackage.ViewModel
             {
                 IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
                 PackageManager packageManager = new PackageManager(repo, Directory);
-                packageManager.UninstallPackage(NameInstalledPackage);
-                // Read all lines inside the logFileNews.txt
-                string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
-                int i = 0;
-                int d = 0;
-                // Check if the file already exist inside the file
-                foreach (string newsName in fileNewsContent)
+                SemanticVersion versionPackage = SemanticVersion.Parse(repo.Search(NameInstalledPackage, false).First().Version.ToString());
+                try
                 {
-                    string[] getVersion = newsName.Split(':');
-                    string package = getVersion[1].Split('\\')[getVersion[1].Split('\\').Length - 1];
-                    if (package == NameInstalledPackage)
+                    packageManager.UninstallPackage(NameInstalledPackage, versionPackage, false, true);
+                    // Read all lines inside the logFileNews.txt
+                    string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
+                    int i = 0;
+                    int d = 0;
+                    // Check if the file already exist inside the file
+                    foreach (string newsName in fileNewsContent)
                     {
-                        d = i;
-                        break;
+                        string[] getVersion = newsName.Split(':');
+                        string package = getVersion[1].Split('\\')[getVersion[1].Split('\\').Length - 1];
+                        if (package == NameInstalledPackage)
+                        {
+                            d = i;
+                            break;
+                        }
+                        else
+                        {
+                            i++;
+                        }
                     }
-                    else
-                    {
-                        i++;
-                    }
+                    // If already exist the package, modify the path and the package inside the file
+                    List<string> linesList = File.ReadAllLines("logFileNews.txt").ToList();
+                    linesList.RemoveAt(d);
+                    File.WriteAllLines("logFileNews.txt", linesList.ToArray());
+                    OnSearchInstalled(obj);
+                    // Information about what happend in the programm
+                    DependencyInstalled();
+                    ResultLog += "Deleted package " + NameInstalledPackage + " in the path: " + PathInstalledPackage + "\n";
                 }
-                // If already exist the package, modify the path and the package inside the file
-                List<string> linesList = File.ReadAllLines("logFileNews.txt").ToList();
-                linesList.RemoveAt(d);
-                File.WriteAllLines("logFileNews.txt", linesList.ToArray());
-                OnSearchInstalled(obj);
-                // Information about what happend in the programm
-                ResultLog += "Deleted package " + NameInstalledPackage + " in the path: " + PathInstalledPackage + "\n";
+                catch (InvalidOperationException ex)
+                {
+                    ResultLog += ex.Message + "\n";
+                }
             }
         }
 
@@ -307,6 +316,24 @@ namespace NugetPackage.ViewModel
             } catch (IOException)
             {
                 ResultLog += "PDF already in use\n";
+            }
+        }
+        private void DependencyInstalled()
+        {
+            try
+            {
+                IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+                PackageManager packageManager = new PackageManager(repo, Directory);
+                string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
+                foreach (string elementInstalled in fileNewsContent)
+                {
+                    string[] nameVersionElementInstalled = elementInstalled.Split('\\');
+                    string[] nameElementInstalled = nameVersionElementInstalled[nameVersionElementInstalled.Length - 1].Split(':');
+                    SemanticVersion versionPackage = SemanticVersion.Parse(repo.Search(nameElementInstalled[0], false).First().Version.ToString());
+                    packageManager.InstallPackage(nameElementInstalled[0], versionPackage);
+                }
+            } catch (Exception ex) {
+                System.IO.Directory.CreateDirectory(Directory);
             }
         }
         #endregion
