@@ -25,5 +25,6 @@ namespace NugetPackage.View
         {
             logArea.ScrollToEnd();
         }
+        
     }
 }

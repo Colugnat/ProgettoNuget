@@ -243,7 +243,7 @@ namespace NugetPackage.ViewModel
                 {
                     ResultLog += ex.Message + "\n";
                 }
-                catch (ArgumentException ex) { }
+                catch (ArgumentException) { }
             }
         }
 
@@ -319,6 +319,7 @@ namespace NugetPackage.ViewModel
                 ResultLog += "PDF already in use\n";
             }
         }
+
         private void DependencyInstalled()
         {
             System.IO.Directory.CreateDirectory(Directory);

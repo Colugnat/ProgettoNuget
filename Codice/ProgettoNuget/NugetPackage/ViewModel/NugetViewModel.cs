@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.Versioning;
+using System.Threading.Tasks;
 
 namespace NugetPackage.ViewModel
 {
@@ -135,7 +136,7 @@ namespace NugetPackage.ViewModel
         {
             SaveCommand = new DelegateCommand(OnSave, CanSave);
             ShowCommand = new DelegateCommand(OnShow, CanShow);
-            SearchCommand = new DelegateCommand(OnSearch, CanSearch);
+            SearchCommand = new DelegateCommand(OnSearchAsync, CanSearch);
             SearchNewsCommand = new DelegateCommand(OnSearchNews, CanSearchNews);
         }
 
@@ -209,17 +210,17 @@ namespace NugetPackage.ViewModel
                 return false;
             }
         }
-
-        private void OnSearch(object obj)
+        private async void OnSearchAsync(object obj)
         {
             // Id of the package
             string packageID = StartSearch;
 
             // Connection with the database
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-
+            List<IPackage> packages = new List<IPackage>();
+            Action newAction = new Action(() => { packages = repo.Search(packageID, false).Take(15).ToList(); });
             // Receive the list of all package searched 
-            List<IPackage> packages = repo.Search(packageID, false).Take(15).ToList();
+            await Task.Run(newAction);
 
             // Create a list
             ResultSearch = new ObservableCollection<string>();
@@ -230,6 +231,7 @@ namespace NugetPackage.ViewModel
                 ResultSearch.Add(p.Id);
             }
         }
+
         private bool CanShow(object arg)
         {
             // Check if one package is selected
@@ -321,6 +323,7 @@ namespace NugetPackage.ViewModel
             return true;
             //System.ArgumentException
         }
+
         private void OnSave(object obj)
         {
             if (NamePackage != null)

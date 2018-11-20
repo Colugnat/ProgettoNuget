@@ -1,3 +1,0 @@
-C:\Users\Ringo\Desktop\NugetPackage\jQuery.UI.Combined:1.12.1
-C:\Users\Ringo\Desktop\NugetPackage\EntityFramework.SqlServerCompact:6.2.0
-C:\Users\Ringo\Desktop\NugetPackage\EntityFramework.Extended:6.1.0.168
