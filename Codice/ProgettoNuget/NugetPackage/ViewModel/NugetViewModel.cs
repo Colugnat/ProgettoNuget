@@ -114,8 +114,17 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("DependencyPackage");
             }
         }
-        public IDelegateCommand BrowseCommand { get; protected set; }
+        public bool IsFastDownloader
+        {
+            get { return Nuget.IsFastDownloader; }
+            set
+            {
+                Nuget.IsFastDownloader = value;
+                OnPropertyChanged("IsFastDownloader");
+            }
+        }
         public IDelegateCommand SaveCommand { get; protected set; }
+        public IDelegateCommand SaveFastCommand { get; protected set; }
         public IDelegateCommand ShowCommand { get; protected set; }
         public IDelegateCommand SearchCommand { get; protected set; }
         public IDelegateCommand SearchNewsCommand { get; protected set; }
@@ -135,8 +144,9 @@ namespace NugetPackage.ViewModel
         protected void RegisterCommands()
         {
             SaveCommand = new DelegateCommand(OnSave, CanSave);
+            SaveFastCommand = new DelegateCommand(OnSaveFast, CanSaveFast);
             ShowCommand = new DelegateCommand(OnShow, CanShow);
-            SearchCommand = new DelegateCommand(OnSearchAsync, CanSearch);
+            SearchCommand = new DelegateCommand(OnSearch, CanSearch);
             SearchNewsCommand = new DelegateCommand(OnSearchNews, CanSearchNews);
         }
 
@@ -211,7 +221,7 @@ namespace NugetPackage.ViewModel
             }
         }
 
-        private async void OnSearchAsync(object obj)
+        private async void OnSearch(object obj)
         {
             // Id of the package
             string packageID = StartSearch;
@@ -220,7 +230,7 @@ namespace NugetPackage.ViewModel
             List<IPackage> packages = new List<IPackage>();
             // Receive the list of all package searched 
             // Create a Action for use the asynchonous method
-            Action newAction = new Action(() => { packages = repo.Search(packageID, false).Take(15).ToList(); });   
+            Action newAction = new Action(() => { packages = repo.Search(packageID, false).Take(15).ToList(); });
             // Wait for the keyboard input
             await Task.Run(newAction);
 
@@ -250,7 +260,7 @@ namespace NugetPackage.ViewModel
         private void OnShow(object obj)
         {
             string packageID = NamePackage;
-
+            StartSearch = NamePackage;
             // Connection with the Nuget database
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
             // Version of the selected package
@@ -295,8 +305,63 @@ namespace NugetPackage.ViewModel
             ResultLog += "Selected package " + NamePackage + "\n";
         }
 
+        private bool CanSaveFast(object arg)
+        {
+            // Check if LogFilePath already exist
+            if (File.Exists("logFileCheck.txt"))
+            {
+                // If logFilePath.txt is empty, use the default path
+                if (File.ReadAllText("logFileCheck.txt") == "")
+                {
+                    File.WriteAllText("logFileCheck.txt", "0");
+                }
+                else
+                {
+                    if (File.ReadAllText("logFileCheck.txt") == "1")
+                        IsFastDownloader = true;
+                    else
+                        IsFastDownloader = false;
+                }
+            }
+            else
+            {
+                // Create the logFilePath.txt
+                File.Create("logFileCheck.txt");
+            }
+            return true;
+        }
+
+        private void OnSaveFast(object obj)
+        {
+            if(IsFastDownloader)
+            {
+                OnSave(obj);
+            }
+        }
+
         private bool CanSave(object arg)
         {
+            // Check if LogFilePath already exist
+            if (File.Exists("logFileCheck.txt"))
+            {
+                // If logFilePath.txt is empty, use the default path
+                if (File.ReadAllText("logFileCheck.txt") == "")
+                {
+                    File.WriteAllText("logFileCheck.txt", "0");
+                }
+                else
+                {
+                    if (File.ReadAllText("logFileCheck.txt") == "1")
+                        IsFastDownloader = true;
+                    else
+                        IsFastDownloader = false;
+                }
+            }
+            else
+            {
+                // Create the logFilePath.txt
+                File.Create("logFileCheck.txt");
+            }
             // Creation of a default path
             string defaultPath = Path.GetDirectoryName(Environment.GetFolderPath(Environment.SpecialFolder.Personal));
             defaultPath = Path.Combine(defaultPath, "Downloads");

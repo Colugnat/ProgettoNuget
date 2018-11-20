@@ -27,6 +27,7 @@ namespace NugetPackage.Model
         public static string NameInstalledPackage { get; set; }
         public static string ResultInstalledPackage { get; set; }
         public static string PathInstalledPackage { get; set; }
+        public static bool IsFastDownloader { get; set; }
         #endregion
 
         #region =================== costruttori ================

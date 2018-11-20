@@ -35,6 +35,17 @@ namespace NugetPackage.ViewModel
                 OnPropertyChanged("Directory");
             }
         }
+
+        public bool IsFastDownloader
+        {
+            get { return Nuget.IsFastDownloader; }
+            set
+            {
+                Nuget.IsFastDownloader = value;
+                OnPropertyChanged("IsFastDownloader");
+            }
+        }
+
         public string ResultLog
         {
             get { return Nuget.ResultLog; }
@@ -46,6 +57,7 @@ namespace NugetPackage.ViewModel
         }
 
         public IDelegateCommand BrowseCommand { get; protected set; }
+        public IDelegateCommand CheckCommand { get; protected set; }
         #endregion
 
         #region =================== costruttori ================
@@ -62,6 +74,47 @@ namespace NugetPackage.ViewModel
         protected void RegisterCommands()
         {
             BrowseCommand = new DelegateCommand(OnBrowse, CanBrowse);
+            CheckCommand = new DelegateCommand(OnCheck, CanCheck);
+        }
+
+        private bool CanCheck(object arg)
+        {
+            // Check if LogFilePath already exist
+            if (File.Exists("logFileCheck.txt"))
+            {
+                // If logFilePath.txt is empty, use the default path
+                if (File.ReadAllText("logFileCheck.txt") == "")
+                {
+                    File.WriteAllText("logFileCheck.txt", "0");
+                }
+                else
+                {
+                    if (File.ReadAllText("logFileCheck.txt") == "1")
+                        IsFastDownloader = true;
+                    else
+                        IsFastDownloader = false;
+                }
+            }
+            else
+            {
+                // Create the logFilePath.txt
+                File.Create("logFileCheck.txt");
+            }
+            return true;
+        }
+
+        private void OnCheck(object obj)
+        {
+            if(IsFastDownloader)
+            {
+                IsFastDownloader = false;
+                File.WriteAllText("logFileCheck.txt", "0");
+            }
+            else
+            {
+                IsFastDownloader = true;
+                File.WriteAllText("logFileCheck.txt", "1");
+            }
         }
 
         private bool CanBrowse(object arg)

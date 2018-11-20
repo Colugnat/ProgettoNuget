@@ -36,6 +36,9 @@
                 <i:EventTrigger EventName="MouseLeftButtonUp">
                     <i:InvokeCommandAction Command="{Binding Path=ShowCommand}"/>
                 </i:EventTrigger>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding Path=SaveFastCommand}"/>
+                </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListBox>
         <TextBox FontSize="15" Name="version" IsReadOnly="True" Margin="10,0,0,20" Text="{Binding Path=ResultPackage, Mode=OneWay}" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" BorderBrush="{x:Null}"/>
