@@ -20,8 +20,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="439*"/>
-            <RowDefinition Height="170*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <ListBox FontSize="15" Name="listNuget" ItemsSource="{Binding Path=InstalledPackage}" SelectedItem="{Binding Path=NameInstalledPackage}" Grid.Row="0" Margin="0,10,0,20">
             <i:Interaction.Triggers>
