@@ -210,12 +210,13 @@ namespace NugetPackage.ViewModel
                 SemanticVersion versionPackage = SemanticVersion.Parse(repo.Search(NameInstalledPackage, false).First().Version.ToString());
                 try
                 {
+                    // Delete the package with all the dependency
                     packageManager.UninstallPackage(NameInstalledPackage, versionPackage, false, true);
                     // Read all lines inside the logFileNews.txt
                     string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
                     int i = 0;
                     int d = 0;
-                    // Check if the file already exist inside the file
+                    // Check the line for delete the package
                     foreach (string newsName in fileNewsContent)
                     {
                         string[] getVersion = newsName.Split(':');
@@ -230,7 +231,7 @@ namespace NugetPackage.ViewModel
                             i++;
                         }
                     }
-                    // If already exist the package, modify the path and the package inside the file
+                    // Delete in the file the package uninstalled
                     List<string> linesList = File.ReadAllLines("logFileNews.txt").ToList();
                     linesList.RemoveAt(d);
                     File.WriteAllLines("logFileNews.txt", linesList.ToArray());
@@ -322,11 +323,13 @@ namespace NugetPackage.ViewModel
 
         private void DependencyInstalled()
         {
+            // Create the directory for put the package inside
             System.IO.Directory.CreateDirectory(Directory);
             
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
             PackageManager packageManager = new PackageManager(repo, Directory);
             string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
+            // Check if a package is uninstalled and is in the file logFileNews.txt
             foreach (string elementInstalled in fileNewsContent)
             {
                 string[] nameVersionElementInstalled = elementInstalled.Split('\\');

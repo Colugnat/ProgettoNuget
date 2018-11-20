@@ -210,16 +210,18 @@ namespace NugetPackage.ViewModel
                 return false;
             }
         }
+
         private async void OnSearchAsync(object obj)
         {
             // Id of the package
             string packageID = StartSearch;
-
             // Connection with the database
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
             List<IPackage> packages = new List<IPackage>();
-            Action newAction = new Action(() => { packages = repo.Search(packageID, false).Take(15).ToList(); });
             // Receive the list of all package searched 
+            // Create a Action for use the asynchonous method
+            Action newAction = new Action(() => { packages = repo.Search(packageID, false).Take(15).ToList(); });   
+            // Wait for the keyboard input
             await Task.Run(newAction);
 
             // Create a list
