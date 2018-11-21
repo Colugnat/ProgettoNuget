@@ -106,6 +106,13 @@ namespace NugetPackage.ViewModel
 
         private bool CanSearchInstalled(object arg)
         {
+            // Check if the file logFileNews.txt is created
+            if (!File.Exists("logFileNews.txt"))
+            {
+                // Create file
+                File.Create("logFileNews.txt");
+                return false;
+            }
             // Check the internet connection
             try
             {
@@ -137,7 +144,6 @@ namespace NugetPackage.ViewModel
 
                 // Connection with the Nuget database
                 IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-
                 // Search all the file with the specified ID
                 IPackage package = repo.Search(packageID, false).First();
                 // Add to the list

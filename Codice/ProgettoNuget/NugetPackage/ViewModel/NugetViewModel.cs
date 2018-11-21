@@ -128,6 +128,7 @@ namespace NugetPackage.ViewModel
         public IDelegateCommand ShowCommand { get; protected set; }
         public IDelegateCommand SearchCommand { get; protected set; }
         public IDelegateCommand SearchNewsCommand { get; protected set; }
+        public IDelegateCommand CheckDeletedCommand { get; protected set; }
         #endregion
 
         #region =================== costruttori ================
@@ -148,6 +149,94 @@ namespace NugetPackage.ViewModel
             ShowCommand = new DelegateCommand(OnShow, CanShow);
             SearchCommand = new DelegateCommand(OnSearch, CanSearch);
             SearchNewsCommand = new DelegateCommand(OnSearchNews, CanSearchNews);
+            CheckDeletedCommand = new DelegateCommand(OnCheckDeleted, CanCheckDeleted);
+        }
+
+        private bool CanCheckDeleted(object arg)
+        {
+            // Check if the file logFileNews.txt is created
+            if (!File.Exists("logFileNews.txt"))
+            {
+                // Create file
+                File.Create("logFileNews.txt");
+                return false;
+            }
+            // Check the internet connection
+            try
+            {
+                using (var client = new WebClient())
+                using (var stream = client.OpenRead("http://www.google.com"))
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                ResultLog = "No internet connection\n";
+                return false;
+            }
+        }
+
+        private void OnCheckDeleted(object obj)
+        {
+            string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
+            string[] dirs = System.IO.Directory.GetDirectories(Directory);
+            string[] checkExists = new string[fileNewsContent.Length];
+            int i = 0;
+            foreach (string newsName in fileNewsContent)
+            {
+                foreach (string dire in dirs)
+                {
+                    string[] getVersion = newsName.Split(':');
+                    string[] nameCurrentId = getVersion[1].Split('\\');
+                    // Id of the package inside the file logFileNews.txt
+                    string packageID = nameCurrentId[nameCurrentId.Length - 1];
+                    if(dire.Contains(packageID + "." + getVersion[getVersion.Length - 1]))
+                    {
+                        checkExists[i] = packageID + "." + getVersion[getVersion.Length - 1] + ":" + "1";
+                        break;
+                    }
+                    else
+                    {
+                        checkExists[i] = packageID + "." + getVersion[getVersion.Length - 1] + ":" + "0";
+                    }
+                }
+                i++;
+            }
+            int y = 0;
+            foreach (string checkExist in checkExists)
+            {
+                if(dirs.Length == 0)
+                {
+                    List<string> linesList = File.ReadAllLines("logFileNews.txt").ToList();
+                    linesList.RemoveAt(y);
+                    File.WriteAllLines("logFileNews.txt", linesList.ToArray());
+                    if (y == 0)
+                        y = 0;
+                    else
+                        y--;
+                }
+                else
+                {
+                    string[] getVersion = checkExist.Split(':');
+                    // Id of the package inside the file logFileNews.txt
+                    string package = getVersion[0];
+                    if (getVersion[getVersion.Length - 1] == "0")
+                    {
+                        List<string> linesList = File.ReadAllLines("logFileNews.txt").ToList();
+                        linesList.RemoveAt(y);
+                        File.WriteAllLines("logFileNews.txt", linesList.ToArray());
+                        if (y == 0)
+                            y = 0;
+                        else
+                            y--;
+                    }
+                    else
+                    {
+                        y++;
+                    }
+                }
+            }
         }
 
         private bool CanSearchNews(object arg)
@@ -265,8 +354,9 @@ namespace NugetPackage.ViewModel
             IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
             // Version of the selected package
             VersionPackage = repo.Search(packageID, false).First().Version.ToString();
-
             string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
+            ResultLog += repo.Search(packageID, false).First().Version.GetOriginalVersionComponents() + "\n";
+
             bool news = false;
             // Create a list for put the name package inside
             for (int i = 0; i < fileNewsContent.Count(); i++)
