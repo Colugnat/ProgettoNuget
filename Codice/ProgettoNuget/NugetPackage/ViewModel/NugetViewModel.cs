@@ -355,7 +355,7 @@ namespace NugetPackage.ViewModel
             // Version of the selected package
             VersionPackage = repo.Search(packageID, false).First().Version.ToString();
             string[] fileNewsContent = File.ReadAllLines("logFileNews.txt");
-            ResultLog += repo.Search(packageID, false).First().Version.GetOriginalVersionComponents() + "\n";
+            ResultLog += repo.Search(packageID, false).First().Version + "\n";
 
             bool news = false;
             // Create a list for put the name package inside
