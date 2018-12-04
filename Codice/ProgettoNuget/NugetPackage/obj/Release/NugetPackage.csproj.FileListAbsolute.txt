@@ -25,17 +25,11 @@ C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Rele
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\ControlzEx.dll
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\MahApps.Metro.dll
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\Microsoft.Practices.ServiceLocation.dll
-C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\Microsoft.Threading.Tasks.dll
-C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.dll
-C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\Microsoft.Threading.Tasks.Extensions.dll
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\PdfSharp.Charting.dll
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\PdfSharp.dll
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\ControlzEx.pdb
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\MahApps.Metro.pdb
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\MahApps.Metro.xml
-C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\Microsoft.Threading.Tasks.xml
-C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\Microsoft.Threading.Tasks.Extensions.xml
-C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\Microsoft.Threading.Tasks.Extensions.Desktop.xml
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\PdfSharp.xml
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\PdfSharp.Charting.xml
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\de\PdfSharp.resources.dll
@@ -43,7 +37,7 @@ C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Rele
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\View\SettingView.g.cs
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\App.baml
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\View\SettingView.baml
-C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\WinFormAnimation.dll
-C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\bin\Release\WinFormAnimation.xml
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\View\InstalledView.g.cs
 C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\View\InstalledView.baml
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\View\AboutView.g.cs
+C:\Users\Ringo\Desktop\Progetti\Nuget\Codice\ProgettoNuget\NugetPackage\obj\Release\View\AboutView.baml
