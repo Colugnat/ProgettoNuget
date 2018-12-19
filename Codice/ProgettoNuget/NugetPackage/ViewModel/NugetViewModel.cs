@@ -154,6 +154,8 @@ namespace NugetPackage.ViewModel
 
         private bool CanCheckDeleted(object arg)
         {
+            // Create the directory for put the package inside
+            System.IO.Directory.CreateDirectory(Directory);
             // Check if the file logFileNews.txt is created
             if (!File.Exists("logFileNews.txt"))
             {
