@@ -1,2 +1,0 @@
-C:\Users\Ringo\Desktop\jquery.mobile:1.4.5
-C:\Users\Ringo\Desktop\jQuery:3.3.1
