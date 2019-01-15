@@ -1,0 +1,1 @@
+C:\Users\Ringo\Desktop\Android\NugetPackage\EntityFramework:6.2.0
