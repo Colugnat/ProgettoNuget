@@ -1,1 +1,1 @@
-# Progetto scaricamento dei Nuget
+# Progetto scaricamento dei pacchetti Nuget
